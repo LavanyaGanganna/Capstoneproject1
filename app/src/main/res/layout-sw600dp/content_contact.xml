@@ -1,0 +1,64 @@
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_contact"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.android.capstoneproject1.Contact"
+    tools:showIn="@layout/activity_contact">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="290dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dimen20"
+            android:layout_marginStart="@dimen/dimen20"
+            android:layout_marginLeft="@dimen/dimen20"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_margin="@dimen/dimen10"
+                android:gravity="left"
+                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/textsize24"
+                android:text="@string/fulladdress">
+            </TextView>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen10"
+                android:orientation="horizontal">
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimen65"
+                    android:text="@string/call_now"
+                    android:src="@drawable/phones"
+                    android:id="@+id/call"
+                    android:layout_marginRight="@dimen/dimen20"
+                    android:layout_marginEnd="@dimen/dimen20"
+                    android:layout_marginLeft="@dimen/dimen10"
+                    android:layout_marginStart="@dimen/dimen10"
+                    android:contentDescription="@string/call_now"
+                    android:background="@drawable/roundbutton" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen10"
+                    android:textSize="@dimen/textsize20"
+                    android:textColor="@android:color/black"
+                    android:text="@string/telno"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>

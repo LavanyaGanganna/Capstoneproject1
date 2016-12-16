@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1.02"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen0"
+        android:layout_weight="0.90"
+        android:id="@+id/checkcontainer">
+
+    </FrameLayout>
+
+   <FrameLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/paycontainer"
+       android:layout_weight="0.02">
+
+   </FrameLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen0"
+        android:layout_weight="0.1"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/textsize28"
+        android:background="#FFDAB9"
+        android:id="@+id/displayid" />
+</LinearLayout>

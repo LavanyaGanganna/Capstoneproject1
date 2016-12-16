@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="280dp"
+    android:layout_gravity="bottom"
+    android:weightSum="10"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen0"
+        android:layout_weight="2"
+        android:layout_gravity="bottom"
+        android:background="#80ffffff"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/signin"
+            android:layout_width="@dimen/dimen0"
+            android:layout_height="@dimen/dimen60"
+            android:layout_marginLeft="-5dp"
+            android:layout_marginStart="-5dp"
+            android:layout_weight="1"
+            android:background="#80ffffff"
+            android:text="@string/sign_in"
+            android:textSize="@dimen/textsize16"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/signup"
+            android:layout_width="@dimen/dimen0"
+            android:layout_height="@dimen/dimen60"
+            android:layout_marginEnd="-5dp"
+            android:layout_marginRight="-5dp"
+            android:layout_weight="1"
+            android:background="#80ffffff"
+            android:text="@string/sign_up"
+            android:textSize="@dimen/textsize16"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lists"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen0"
+        android:layout_weight="6.75"
+        android:layout_gravity="bottom"
+        android:background="#F5FFFA">
+    </ListView>
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F5FFFA"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:id="@+id/prbar"
+        android:visibility="gone"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen0"
+        android:layout_weight="1.25"
+        android:gravity="top|center_horizontal"
+        android:background="#FFDAB9"
+        android:text="@string/address"
+        android:textAllCaps="false" />
+
+</LinearLayout>

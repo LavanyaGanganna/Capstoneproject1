@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="10">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen0"
+        android:layout_weight="9">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen0"
+        android:layout_weight="9"
+        android:orientation="vertical">
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/dimen55"
+        android:layout_marginBottom="@dimen/dimen30"
+        android:layout_height="@dimen/dimen0"
+        android:layout_weight="8.5"
+        android:id="@+id/list"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:orientation="vertical">
+    </android.support.v7.widget.RecyclerView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/dimen20"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+            <Button
+                android:layout_width="@dimen/dimen0"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/add_more_item"
+                android:textColor="#FF4500"
+                android:id="@+id/addmore"
+                android:layout_marginLeft="@dimen/dimen10"
+                android:layout_marginStart="@dimen/dimen10"
+                android:layout_marginRight="@dimen/dimen20"
+                android:layout_marginEnd="@dimen/dimen20"
+                android:background="@drawable/button_bg"/>
+            <Button
+                android:layout_width="@dimen/dimen0"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:id="@+id/removeall"
+                android:text="@string/remove_all"
+                android:textColor="#FF4500"
+                android:layout_marginRight="@dimen/dimen10"
+                android:layout_marginEnd="@dimen/dimen10"
+                android:background="@drawable/button_bg"/>
+        </LinearLayout>
+</LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="@dimen/dimen0"
+    android:gravity="bottom"
+    android:layout_gravity="bottom"
+android:orientation="horizontal"
+    android:layout_weight="1"
+android:background="#FFDAB9">
+
+<TextView
+    android:layout_width="@dimen/dimen0"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:id="@+id/totaltext"
+    android:layout_marginLeft="@dimen/dimen10"
+    android:layout_marginStart="@dimen/dimen10"
+    android:textColor="@android:color/black"
+    android:textSize="@dimen/textsize24"
+    android:text="@string/items_3_99"/>
+<Button
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="0.5"
+    android:layout_marginTop="@dimen/dimen5"
+    android:id="@+id/checkout"
+    android:background="#502922"
+    android:text="@string/checkout"
+    android:textAllCaps="false"
+    android:textSize="@dimen/textsize20"
+    android:textColor="@android:color/white"/>
+
+</LinearLayout>
+
+</LinearLayout>

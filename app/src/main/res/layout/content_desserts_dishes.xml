@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_soups"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="10"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.android.capstoneproject1.SoupsActivity">
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen0"
+        android:layout_weight="8.5"
+        android:id="@+id/recycledeserts">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen0"
+        android:layout_weight="1.5"
+        android:background="#FFDAB9"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/dimen0"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/dimen8"
+            android:layout_marginStart="@dimen/dimen8"
+            android:textSize="24sp"
+            android:textColor="@android:color/black"
+            android:text="@string/items"
+            android:id="@+id/ordertext" />
+        <Button
+            android:layout_width="@dimen/dimen0"
+            android:layout_margin="@dimen/dimen8"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:id="@+id/viewcart"
+            android:textSize="@dimen/textsize20"
+            android:textAllCaps="false"
+            android:text="@string/view_cart"
+            android:textColor="@android:color/white"
+            android:background="#502922"/>
+    </LinearLayout>
+</LinearLayout>

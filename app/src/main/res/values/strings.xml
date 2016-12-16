@@ -1,0 +1,144 @@
+<resources xmlns:xliff="http://schemas.android.com/tools">
+    <string name="app_name">Capstoneproject1</string>
+    <string name="enter_location">Enter Location</string>
+    <string name="find_restaurants">FIND RESTAURANTS</string>
+    <string name="start_your_order">START YOUR ORDER</string>
+    <string name="red_chillies_kerala_food">Red chillies Kerala Food</string>
+    <string name="open_drawer" translatable="false">Open menu drawer</string>
+    <string name="close_drawer" translatable="false">Close menu drawer</string>
+    <string name="red_chillies">Red chillies</string>
+    <string name="puttu_or_rice_cake">puttu or rice cake</string>
+    <string name="home_button" translatable="false">Home button</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="address">Red Chillies-South Indian Malabar Cuisine \n 167 S Main St,Milpitas, CA 95035</string>
+    <string name="fulladdress">Red Chillies-South Indian, \n Malabar Cuisine, \n 167 south main street, \n Milpitas, CA 95035 \n </string>
+
+    <string name="telno" translatable="false">Tel: 5106468490 </string>
+    <string name="addresstr">Red Chillies-Milpitas, CA 95035</string>
+    <string name="cutlet">Vegetable Cutlet (2 pcs) \n 
+(A veggie delight; Cutlet made with mix vegetables)</string>
+    <string name="mushroom">Mushroom Pepper Fry \n
+(Dices of mushroom tossed with crushed black pepper)</string>
+    <string name="gobi">Gobi Manchurian \n
+(Fried cauliflower with Manchurian sauce and spices)</string>
+    <string name="chillgobi">Chilli Gobi \n
+(Fried cauliflower sautéed with onion, bell pepper and chilli sauce)</string>
+    <string name="vegpakora">Vegetable Pakora \n
+(Fresh vegetables marinated in spicy batter and deep fried)</string>
+    <string name="babycorn">Baby Corn Manchurian \n
+(Fried baby corn with Manchurian sauce and spices))</string>
+    <string name="chillpaneer">Chilli Panner \n
+(Fried paneer sautéed with onion, bell pepper and chilli sauce)</string>
+    <string name="fcutlet">Fish cutlet (2 pcs)</string>
+    <string name="nfry">Natholi Fry \n
+(Crispy Anchovy fry- A Red Chillies Specialty)</string>
+    <string name="fpakora">Fish Pakora \n
+(Fish marinated in spicy batter and deep fried)</string>
+    <string name="grillshrimp">Malabar Grilled Shrimps \n
+(Large shrimps grilled with Malabar spices)</string>
+    <string name="chemeen">Chemmeen Chilli Fry \n
+(Fried shrimps tossed with green chilli)</string>
+    <string name="fchicken">Travancore Fried Chicken \n
+(A local delicacy from Central Travancore)</string>
+    <string name="chillchicken">Chilli Chicken \n
+(Fried boneless chicken sautéed with onion, bell pepper and chilli)</string>
+    <string name="chick">Chicken 65 \n
+        (Fried boneless chicken cubes tossed with ginger, garlic and green chilli)</string>
+    <string name="tikka">Chicken Tikka \n
+        (Marinated tender boneless chicken cubes baked in Tandoor oven)</string>
+    <string name="beef">Beef Cutlet – 2 pcs \n
+        (A meat delight; Cutlet made with beef)</string>
+    <string-array name="listoptions">
+        <item>Home</item>
+        <item>Signup</item>
+        <item>Photos</item>
+        <item>Menu</item>
+        <item>Order</item>
+        <item>location</item>
+    </string-array>
+    <string name="title_activity_sign_up">SignUp</string>
+    <string name="title_activity_thank">Thank</string>
+    <string name="title_activity_thanks">Thanks</string>
+    <string name="title_activity_sign_in">SignIn</string>
+    <string name="title_activity_our_menu">OurMenu</string>
+    <string name="title_activity_locate">LocateActivity</string>
+    <string name="title_activity_starters">StartersActivity</string>
+    <string name="order">+Order</string>
+    <string name="title_activity_items_summary">ItemsSummary</string>
+    <string name="shoppinglist">shoppinglist</string>
+    <string name="searching">searching</string>
+    <string name="title_activity_view_summary">ViewSummary</string>
+    <string name="remove">Remove</string>
+    <string name="title_activity_checkout">Checkout</string>
+    <string name="payment_method">Select Payment Method</string>
+    <string name="title_activity_paypal_integration">PaypalIntegration</string>
+    <string name="title_activity_mail_sender">MailSender</string>
+    <string name="united_states">United States</string>
+    <string name="country">Country</string>
+    <string name="title_activity_admindisplay">Admindisplay</string>
+    <string name="orders_table">Orders Table</string>
+    <string name="email_address">email address</string>
+    <string name="delivered">Delivered</string>
+    <string name="title_activity_android_pay">AndroidPay</string>
+    <string name="title_activity_contact">Contact</string>
+    <string name="call_now">Call Now</string>
+    <string name="title_activity_soups">SoupsActivity</string>
+    <string name="view_cart">View Cart</string>
+    <string name="banner_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="banner_footer" translatable="false">ca-app-pub-7293008338185014/5610925084</string>
+    <string name="interstitial_full_screen" translatable="false">ca-app-pub-7293008338185014/7087658284</string>
+    <string name="title_activity_vegetarian">Vegetarian</string>
+    <string name="title_activity_fish_dishes">FishDishes</string>
+    <string name="title_activity_birds_nest">BirdsNest</string>
+    <string name="redchillies">Chilys</string>
+    <string name="title_activity_meat_dishes">MeatDishes</string>
+    <string name="title_activity_biryani">Biryani</string>
+    <string name="title_activity_breads_dishes">BreadsDishes</string>
+    <string name="title_activity_desserts_dishes">DessertsDishes</string>
+    <string name="title_activity_beverages_dishes">BeveragesDishes</string>
+    <string name="title_activity_wrap_dishes">WrapDishes</string>
+    <string name="_5_99">$5.99</string>
+    <string name="remove_all">Remove All</string>
+    <string name="add_more_item">Add More Item</string>
+    <string name="share">share</string>
+    <string name="pay_with">Pay With</string>
+    <string name="payment_methods">Payment Methods</string>
+    <string name="_20_78">$20.78</string>
+    <string name="order_total">Order Total:</string>
+    <string name="_0_00">$0.00</string>
+    <string name="tax">Tax:</string>
+    <string name="_5_66">$5.66</string>
+    <string name="subtotal">Subtotal:</string>
+    <string name="viewcart">ViewCart</string>
+    <string name="items">items</string>
+    <string name="items_3_99">items| $3.99</string>
+    <string name="checkout">CheckOut</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="no_account_yet_create_one">No account yet? Create one</string>
+    <string name="email_sign">*Email</string>
+    <string name="password_6_characters_min">*Password(6 characters min)</string>
+    <string name="confirm_password">*Confirm Password</string>
+    <string name="mobile_number">*Mobile Number</string>
+    <string name="submit">Submit</string>
+    <string name="dollarone">1 dollar</string>
+    <string name="dollar">dollar</string>
+    <string name="callnow">call now</string>
+    <string name="shopping_cart">shopping cart</string>
+    <string name="items_selected">items selected</string>
+    <string name="itemselected">items selected</string>
+    <string name="itemremoved">item removed</string>
+    <string name="itemadded">item added</string>
+    <string name="google_sign_in">google sign in</string>
+    <string name="enter_email_address">enter email address</string>
+    <string name="enter_password">enter password</string>
+    <string name="enter_email">enter email</string>
+    <string name="reenter_password">reenter password</string>
+    <string name="enter_mobile_number">enter mobile number</string>
+    <string name="already_a_member_login">Already a member? Login</string>
+    <string name="home">home</string>
+
+
+</resources>
