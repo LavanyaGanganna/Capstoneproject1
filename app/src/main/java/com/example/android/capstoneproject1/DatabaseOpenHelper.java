@@ -44,7 +44,7 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper {
                 byte[] mBuffer = new byte[1024];
                 int mLength;
                 while ((mLength = mInput.read(mBuffer)) > 0) {
-                    Log.d(TAG, "copying");
+                    // Log.d(TAG, "copying");
                     mOutput.write(mBuffer, 0, mLength);
                 }
                 mOutput.flush();
@@ -59,12 +59,7 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper {
             return null;
         }
 
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            GetMenuData getMenuData = new GetMenuData(mcontext);
-            getMenuData.getcursor();
-        }
+
     }
 
     public void copyDataBase() throws IOException {

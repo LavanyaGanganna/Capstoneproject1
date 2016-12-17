@@ -4,30 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1.02"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="1.02">
 
     <FrameLayout
+        android:id="@+id/checkcontainer"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen0"
-        android:layout_weight="0.90"
-        android:id="@+id/checkcontainer">
+        android:layout_weight="0.90">
 
     </FrameLayout>
 
-   <FrameLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:id="@+id/paycontainer"
-       android:layout_weight="0.02">
+    <FrameLayout
+        android:id="@+id/paycontainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.02">
 
-   </FrameLayout>
+    </FrameLayout>
+
     <TextView
+        android:id="@+id/displayid"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen0"
         android:layout_weight="0.1"
-        android:textColor="@android:color/black"
-        android:textSize="@dimen/textsize28"
         android:background="#FFDAB9"
-        android:id="@+id/displayid" />
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/textsize28" />
 </LinearLayout>

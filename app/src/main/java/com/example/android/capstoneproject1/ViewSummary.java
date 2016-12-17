@@ -1,5 +1,6 @@
 package com.example.android.capstoneproject1;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
@@ -35,6 +36,7 @@ import static android.content.ContentValues.TAG;
 
 public class ViewSummary extends AppCompatActivity implements SummaryAdapter.SummaryInterface {
     private static final String TAG = ViewSummary.class.getSimpleName();
+
     RecyclerView recyclerView;
     TextView textView;
     Button button;
@@ -51,9 +53,9 @@ public class ViewSummary extends AppCompatActivity implements SummaryAdapter.Sum
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_summary);
-        itemcnt = getIntent().getIntExtra("values", 0);
-        price = getIntent().getDoubleExtra("price", 0);
-        recvdstring = getIntent().getStringExtra("totalcost");
+        itemcnt = getIntent().getIntExtra(getString(R.string.values), 0);
+        price = getIntent().getDoubleExtra(getString(R.string.price), 0);
+        recvdstring = getIntent().getStringExtra(getString(R.string.total));
         recyclerView = (RecyclerView) findViewById(R.id.list);
         textView = (TextView) findViewById(R.id.totaltext);
         button = (Button) findViewById(R.id.checkout);
@@ -61,11 +63,11 @@ public class ViewSummary extends AppCompatActivity implements SummaryAdapter.Sum
         addmore = (Button) findViewById(R.id.addmore);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Typeface darllarch = Typeface.createFromAsset(getAssets(), "font/DarkLarch_PERSONAL_USE.ttf");
+        Typeface darllarch = Typeface.createFromAsset(getAssets(), getString(R.string.personalttf));
         TextView mytitle = (TextView) toolbar.getChildAt(0);
         mytitle.setTypeface(darllarch);
         mytitle.setTextSize(30);
-        getSupportActionBar().setTitle("Summary");
+        getSupportActionBar().setTitle(R.string.summs);
         boolean tabletsize = getResources().getBoolean(R.bool.isTablet);
         if (tabletsize) {
             mytitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 45);
@@ -79,11 +81,11 @@ public class ViewSummary extends AppCompatActivity implements SummaryAdapter.Sum
         itemcnt = startersListClass.getsize();
         price = startersListClass.getprice();
         if (startersListClass.getsize() > 1) {
-            textView.setText(String.format(Locale.ENGLISH, "%d items | $ %.2f", startersListClass.getsize(), startersListClass.getprice()));
-            recvdstring = String.format(Locale.ENGLISH, "%d items | $ %.2f", startersListClass.getsize(), startersListClass.getprice());
+            textView.setText(String.format(Locale.ENGLISH, "%d " + getString(R.string.itemss) + "%.2f", startersListClass.getsize(), startersListClass.getprice()));
+            recvdstring = String.format(Locale.ENGLISH, "%d " + getString(R.string.itemss) + "%.2f", startersListClass.getsize(), startersListClass.getprice());
         } else {
-            textView.setText(String.format(Locale.ENGLISH, "%d item | $ %.2f", startersListClass.getsize(), startersListClass.getprice()));
-            recvdstring = String.format(Locale.ENGLISH, "%d item | $ %.2f", startersListClass.getsize(), startersListClass.getprice());
+            textView.setText(String.format(Locale.ENGLISH, "%d " + getString(R.string.item) + "%.2f", startersListClass.getsize(), startersListClass.getprice()));
+            recvdstring = String.format(Locale.ENGLISH, "%d " + getString(R.string.item) + "%.2f", startersListClass.getsize(), startersListClass.getprice());
         }
         addmore.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,9 +108,9 @@ public class ViewSummary extends AppCompatActivity implements SummaryAdapter.Sum
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ViewSummary.this, Checkout.class);
-                intent.putExtra("price", price);
-                intent.putExtra("values", itemcnt);
-                intent.putExtra("totalcost", recvdstring);
+                intent.putExtra(getString(R.string.price), price);
+                intent.putExtra(getString(R.string.values), itemcnt);
+                intent.putExtra(getString(R.string.total), recvdstring);
                 startActivity(intent);
             }
         });
@@ -118,11 +120,11 @@ public class ViewSummary extends AppCompatActivity implements SummaryAdapter.Sum
     @Override
     public void onBackPressed() {
         Intent returnIntent = new Intent();
-        returnIntent.putExtra("price", price);
-        returnIntent.putExtra("values", itemcnt);
-        returnIntent.putExtra("totalcost", recvdstring);
+        returnIntent.putExtra(getString(R.string.price), price);
+        returnIntent.putExtra(getString(R.string.values), itemcnt);
+        returnIntent.putExtra(getString(R.string.total), recvdstring);
         SharedPreferences Preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        Preferences.edit().putBoolean("backpress", true).apply();
+        Preferences.edit().putBoolean(getString(R.string.backpress), true).apply();
         setResult(RESULT_OK, returnIntent);
         finish();
         super.onBackPressed();
@@ -135,12 +137,14 @@ public class ViewSummary extends AppCompatActivity implements SummaryAdapter.Sum
         recvdstring = sending;
         if (itemcnt != 0) {
             ui_hot.setVisibility(View.VISIBLE);
-            ui_hot.setText(Integer.toString(itemcnt));
+            //  ui_hot.setText(Integer.toString(itemcnt));
+            ui_hot.setText(String.format(Locale.ENGLISH, "%d", itemcnt));
             ui_hot.setContentDescription(Integer.toString(itemcnt) + getString(R.string.itemselected));
         } else {
             ui_hot.setVisibility(View.GONE);
         }
         textView.setText(sending);
+
     }
 
     @Override
@@ -153,7 +157,8 @@ public class ViewSummary extends AppCompatActivity implements SummaryAdapter.Sum
         int sizes = StartersListClass.starterclasses.size();
         if (sizes != 0) {
             ui_hot.setVisibility(View.VISIBLE);
-            ui_hot.setText(Integer.toString(sizes));
+            // ui_hot.setText(Integer.toString(sizes));
+            ui_hot.setText(String.format(Locale.ENGLISH, "%d", sizes));
             ui_hot.setContentDescription(Integer.toString(sizes) + getString(R.string.itemselected));
         }
         MenuItem menuItem = menu.findItem(R.id.Shareaction);
@@ -161,7 +166,7 @@ public class ViewSummary extends AppCompatActivity implements SummaryAdapter.Sum
         if (mshareactionprovider != null) {
             mshareactionprovider.setShareIntent(shareintent);
         } else {
-            Log.d(TAG, "share action provider is null");
+            Log.d(TAG, getString(R.string.sharenull));
         }
         Drawable drawable = menu.getItem(0).getIcon();
         Drawable drawable1 = menu.getItem(1).getIcon();
@@ -175,11 +180,11 @@ public class ViewSummary extends AppCompatActivity implements SummaryAdapter.Sum
         switch (item.getItemId()) {
             case android.R.id.home:
                 Intent returnIntent = new Intent();
-                returnIntent.putExtra("price", price);
-                returnIntent.putExtra("values", itemcnt);
-                returnIntent.putExtra("totalcost", recvdstring);
+                returnIntent.putExtra(getString(R.string.price), price);
+                returnIntent.putExtra(getString(R.string.values), itemcnt);
+                returnIntent.putExtra(getString(R.string.total), recvdstring);
                 SharedPreferences Preferences = PreferenceManager.getDefaultSharedPreferences(this);
-                Preferences.edit().putBoolean("backpress", true).apply();
+                Preferences.edit().putBoolean(getString(R.string.backpress), true).apply();
                 setResult(RESULT_OK, returnIntent);
                 finish();
                 break;
@@ -189,10 +194,10 @@ public class ViewSummary extends AppCompatActivity implements SummaryAdapter.Sum
                 for (int i = 0; i < StartersListClass.starterclasses.size(); i++) {
                     sharebody = sharebody + StartersListClass.starterclasses.get(i).getTitles() + "--" + StartersListClass.starterclasses.get(i).getPrices() + "\n";
                 }
-                shareintent.setType("text/plain");
+                shareintent.setType(getString(R.string.texts));
                 sharebody = sharebody + FOOD_SHARE_HASHTAG;
                 shareintent.putExtra(Intent.EXTRA_TEXT, sharebody);
-                startActivity(Intent.createChooser(shareintent, "share via"));
+                startActivity(Intent.createChooser(shareintent, getString(R.string.shares)));
                 break;
 
             default:

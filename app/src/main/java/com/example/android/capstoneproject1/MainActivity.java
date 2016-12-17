@@ -1,10 +1,13 @@
 package com.example.android.capstoneproject1;
 
 import android.annotation.SuppressLint;
+import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.Loader;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -64,6 +67,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import data.MenuDbHelper;
+import data.MenuTableContract;
 import me.relex.circleindicator.CircleIndicator;
 
 
@@ -88,9 +92,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        new EndpointsAsyncTask().execute("admin@redchillies.com", "mannam", null);
-
-
+        DatabaseOpenHelper databaseOpenHelper = new DatabaseOpenHelper(MainActivity.this, null, null, 1);
+        try {
+            databaseOpenHelper.copyDataBase();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        new EndpointsAsyncTask().execute(getString(R.string.admin), getString(R.string.passman), null);
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -112,24 +120,14 @@ public class MainActivity extends AppCompatActivity {
                 fragmentTransaction.replace(R.id.container, homeFragment, HOMEFRAG).commit();
             }
         });
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                DatabaseOpenHelper databaseOpenHelper = new DatabaseOpenHelper(MainActivity.this, null, null, 1);
-                try {
-                    databaseOpenHelper.copyDataBase();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
+
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        Typeface darllarch = Typeface.createFromAsset(getAssets(), "font/DarkLarch_PERSONAL_USE.ttf");
+        Typeface darllarch = Typeface.createFromAsset(getAssets(), getString(R.string.personalttf));
         TextView mytitle = (TextView) toolbar.getChildAt(0);
         mytitle.setTypeface(darllarch);
         mytitle.setTextSize(30);
-        getSupportActionBar().setTitle("Red Chillies");
+        getSupportActionBar().setTitle(R.string.redc);
         //	getSupportActionBar().setLogo(R.drawable.homelogomin4);
         boolean tabletsize = getResources().getBoolean(R.bool.isTablet);
         if (tabletsize) {
@@ -199,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
                         // - 10.0.2.2 is localhost's IP address in Android emulator
                         // - turn off compression when running against local devappserver
                         // .setRootUrl("http://10.0.2.2:8080/_ah/api/")
-                        .setRootUrl("https://capstoneproject1-150817.appspot.com/_ah/api/")
+                        .setRootUrl(getString(R.string.appspots))
                         .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
                             @Override
                             public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) throws IOException {
@@ -220,7 +218,6 @@ public class MainActivity extends AppCompatActivity {
                 retuser = myApiService.checkUser(email).execute();
 
                 if (retuser == null) {
-                    Log.d(TAG, "null null null");
                     Users users = new Users();
                     users.setEmail(email);
                     users.setPword(pswrd);
@@ -238,13 +235,13 @@ public class MainActivity extends AppCompatActivity {
 
     private String getdescription(int pos) {
         if (pos == 0) {
-            return "kerala fried fish";
+            return getString(R.string.keralfryfish);
         } else if (pos == 1) {
-            return "fried rice";
+            return getString(R.string.fryrice);
         } else if (pos == 2) {
-            return "kerala steamed puttu";
+            return getString(R.string.steamputtu);
         } else if (pos == 3) {
-            return "dil kush sweet";
+            return getString(R.string.dilkush);
         } else
             return null;
     }

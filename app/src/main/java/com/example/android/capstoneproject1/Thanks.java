@@ -21,11 +21,11 @@ public class Thanks extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        Typeface darllarch = Typeface.createFromAsset(getAssets(), "font/DarkLarch_PERSONAL_USE.ttf");
+        Typeface darllarch = Typeface.createFromAsset(getAssets(), getString(R.string.personalttf));
         TextView mytitle = (TextView) toolbar.getChildAt(0);
         mytitle.setTypeface(darllarch);
         mytitle.setTextSize(30);
-        getSupportActionBar().setTitle("Thanks");
+        getSupportActionBar().setTitle(R.string.thank);
         boolean tabletsize = getResources().getBoolean(R.bool.isTablet);
         if (tabletsize) {
             mytitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 45);

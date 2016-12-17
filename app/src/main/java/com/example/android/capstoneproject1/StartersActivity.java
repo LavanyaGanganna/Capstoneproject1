@@ -49,17 +49,17 @@ public class StartersActivity extends AppCompatActivity implements StartersAdapt
         setContentView(R.layout.activity_starters);
         textView = (TextView) findViewById(R.id.ordertext);
         recyclerView = (RecyclerView) findViewById(R.id.starterslist);
-        itemcnt = getIntent().getIntExtra("values", 0);
-        price = getIntent().getDoubleExtra("price", 0);
-        recvdstring = getIntent().getStringExtra("totalcost");
+        itemcnt = getIntent().getIntExtra(getString(R.string.values), 0);
+        price = getIntent().getDoubleExtra(getString(R.string.price), 0);
+        recvdstring = getIntent().getStringExtra(getString(R.string.total));
         StartersListClass startersListClass = new StartersListClass();
         if (startersListClass.getsize() > 1) {
-            textView.setText(String.format(Locale.ENGLISH, "%d items | $ %.2f", startersListClass.getsize(), startersListClass.getprice()));
+            textView.setText(String.format(Locale.ENGLISH, "%d " + getString(R.string.itemss) + "%.2f", startersListClass.getsize(), startersListClass.getprice()));
         } else {
-            textView.setText(String.format(Locale.ENGLISH, "%d item | $ %.2f", startersListClass.getsize(), startersListClass.getprice()));
+            textView.setText(String.format(Locale.ENGLISH, "%d " + getString(R.string.item) + "%.2f", startersListClass.getsize(), startersListClass.getprice()));
         }
         cartbutton = (Button) findViewById(R.id.viewcart);
-        Log.d(TAG, "oncreate");
+        // Log.d(TAG, "oncreate");
         for (int i = 0; i < 17; i++) {
             starterclassArrayList.add(DatabaseList.fullmenulist.get(i));
         }
@@ -73,11 +73,11 @@ public class StartersActivity extends AppCompatActivity implements StartersAdapt
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        Typeface darllarch = Typeface.createFromAsset(getAssets(), "font/DarkLarch_PERSONAL_USE.ttf");
+        Typeface darllarch = Typeface.createFromAsset(getAssets(), getString(R.string.personalttf));
         TextView mytitle = (TextView) toolbar.getChildAt(0);
         mytitle.setTypeface(darllarch);
         mytitle.setTextSize(30);
-        getSupportActionBar().setTitle("Starters");
+        getSupportActionBar().setTitle(R.string.start);
         boolean tabletsize = getResources().getBoolean(R.bool.isTablet);
         if (tabletsize) {
             mytitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 45);
@@ -87,9 +87,9 @@ public class StartersActivity extends AppCompatActivity implements StartersAdapt
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(StartersActivity.this, ViewSummary.class);
-                intent.putExtra("values", itemcnt);
-                intent.putExtra("price", price);
-                intent.putExtra("totalcost", recvdstring);
+                intent.putExtra(getString(R.string.values), itemcnt);
+                intent.putExtra(getString(R.string.price), price);
+                intent.putExtra(getString(R.string.total), recvdstring);
                 startActivityForResult(intent, 5);
             }
         });
@@ -105,7 +105,8 @@ public class StartersActivity extends AppCompatActivity implements StartersAdapt
         int sizes = StartersListClass.starterclasses.size();
         if (sizes != 0) {
             ui_hot.setVisibility(View.VISIBLE);
-            ui_hot.setText(Integer.toString(sizes));
+            //ui_hot.setText(Integer.toString(sizes));
+            ui_hot.setText(String.format(Locale.ENGLISH, "%d", sizes));
             ui_hot.setContentDescription(Integer.toString(sizes) + getString(R.string.itemselected));
         }
 
@@ -113,9 +114,9 @@ public class StartersActivity extends AppCompatActivity implements StartersAdapt
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(StartersActivity.this, ViewSummary.class);
-                intent.putExtra("totalcost", recvdstring);
-                intent.putExtra("price", price);
-                intent.putExtra("values", itemcnt);
+                intent.putExtra(getString(R.string.total), recvdstring);
+                intent.putExtra(getString(R.string.price), price);
+                intent.putExtra(getString(R.string.values), itemcnt);
 
                 startActivity(intent);
             }
@@ -130,13 +131,14 @@ public class StartersActivity extends AppCompatActivity implements StartersAdapt
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 5) {
             if (resultCode == RESULT_OK) {
-                Log.d(TAG, "inside onActivityresult");
-                price = data.getDoubleExtra("price", 0);
-                itemcnt = data.getIntExtra("values", 0);
-                recvdstring = data.getStringExtra("totalcost");
+                // Log.d(TAG, "inside onActivityresult");
+                price = data.getDoubleExtra(getString(R.string.price), 0);
+                itemcnt = data.getIntExtra(getString(R.string.values), 0);
+                recvdstring = data.getStringExtra(getString(R.string.total));
                 if (itemcnt != 0) {
                     ui_hot.setVisibility(View.VISIBLE);
-                    ui_hot.setText(Integer.toString(itemcnt));
+                    //   ui_hot.setText(Integer.toString(itemcnt));
+                    ui_hot.setText(String.format(Locale.ENGLISH, "%d", itemcnt));
                     ui_hot.setContentDescription(Integer.toString(itemcnt) + getString(R.string.itemselected));
                 } else {
                     ui_hot.setVisibility(View.GONE);
@@ -154,7 +156,8 @@ public class StartersActivity extends AppCompatActivity implements StartersAdapt
         recvdstring = sending;
         if (itemcnt != 0) {
             ui_hot.setVisibility(View.VISIBLE);
-            ui_hot.setText(Integer.toString(itemcnt));
+            //  ui_hot.setText(Integer.toString(itemcnt));
+            ui_hot.setText(String.format(Locale.ENGLISH, "%d", itemcnt));
             ui_hot.setContentDescription(Integer.toString(itemcnt) + getString(R.string.itemselected));
         } else {
             ui_hot.setVisibility(View.GONE);
@@ -166,11 +169,11 @@ public class StartersActivity extends AppCompatActivity implements StartersAdapt
     @Override
     public void onBackPressed() {
         Intent returnIntent = new Intent();
-        returnIntent.putExtra("values", itemcnt);
-        returnIntent.putExtra("price", price);
-        returnIntent.putExtra("totalcost", recvdstring);
+        returnIntent.putExtra(getString(R.string.values), itemcnt);
+        returnIntent.putExtra(getString(R.string.price), price);
+        returnIntent.putExtra(getString(R.string.total), recvdstring);
         SharedPreferences Preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        Preferences.edit().putBoolean("backpress", true).apply();
+        Preferences.edit().putBoolean(getString(R.string.backpress), true).apply();
         setResult(RESULT_OK, returnIntent);
         finish();
         super.onBackPressed();
@@ -182,11 +185,11 @@ public class StartersActivity extends AppCompatActivity implements StartersAdapt
         int id = item.getItemId();
         if (id == android.R.id.home) {
             Intent returnIntent = new Intent();
-            returnIntent.putExtra("values", itemcnt);
-            returnIntent.putExtra("price", price);
-            returnIntent.putExtra("totalcost", recvdstring);
+            returnIntent.putExtra(getString(R.string.values), itemcnt);
+            returnIntent.putExtra(getString(R.string.price), price);
+            returnIntent.putExtra(getString(R.string.total), recvdstring);
             SharedPreferences Preferences = PreferenceManager.getDefaultSharedPreferences(this);
-            Preferences.edit().putBoolean("backpress", true).apply();
+            Preferences.edit().putBoolean(getString(R.string.backpress), true).apply();
             setResult(RESULT_OK, returnIntent);
             finish();
             return true;

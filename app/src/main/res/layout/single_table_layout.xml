@@ -1,35 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/ordertable"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/ordertable">
+    android:orientation="vertical">
+
     <TextView
         android:id="@+id/emailtable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:typeface="serif"
-        android:textSize="@dimen/textsize18"
+        android:gravity="center"
         android:text="@string/email_address"
-        android:gravity="center" />
+        android:textSize="@dimen/textsize18"
+        android:textStyle="bold"
+        android:typeface="serif" />
+
     <LinearLayout
+        android:id="@+id/titleprice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/titleprice">
+        android:orientation="vertical">
+
     </LinearLayout>
 
     <TextView
+        android:id="@+id/totaltext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/delbutton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/totaltext"/>
-
-   <Button
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:drawableRight="@android:drawable/ic_menu_delete"
-       android:drawableEnd="@android:drawable/ic_menu_delete"
-       android:id="@+id/delbutton"
-       android:text="@string/delivered"/>
+        android:drawableEnd="@android:drawable/ic_menu_delete"
+        android:drawableRight="@android:drawable/ic_menu_delete"
+        android:text="@string/delivered" />
 
 </LinearLayout>

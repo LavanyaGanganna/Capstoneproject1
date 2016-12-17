@@ -6,81 +6,87 @@
     android:fitsSystemWindows="true">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/dimen56"
+        android:orientation="vertical"
         android:paddingLeft="@dimen/dimen24"
-        android:paddingRight="@dimen/dimen24">
+        android:paddingRight="@dimen/dimen24"
+        android:paddingTop="@dimen/dimen56">
 
-        <ImageView android:src="@drawable/homelog4"
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dimen100"
+            android:layout_gravity="center_horizontal"
             android:layout_marginBottom="@dimen/dimen24"
             android:contentDescription="@string/redchillies"
-            android:layout_gravity="center_horizontal" />
+            android:src="@drawable/homelog4" />
+
         <com.google.android.gms.common.SignInButton
             android:id="@+id/sign_in_button"
             android:layout_width="wrap_content"
-            android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/google_sign_in"/>
+            android:layout_gravity="center"
+            android:contentDescription="@string/google_sign_in" />
+
         <ProgressBar
+            android:id="@+id/progressbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/progressbar"
             android:layout_gravity="top"
-            android:visibility="gone"/>
+            android:visibility="gone" />
         <!-- Email Label -->
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen20"
-            android:layout_marginBottom="@dimen/dimen20">
+            android:layout_marginBottom="@dimen/dimen20"
+            android:layout_marginTop="@dimen/dimen20">
+
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/input_email"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen40"
                 android:background="@drawable/edittextstyle"
-                android:inputType="textEmailAddress"
-                android:textSize="@dimen/textsize20"
                 android:fontFamily="serif"
-                android:hint="@string/email" />
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:textSize="@dimen/textsize20" />
         </android.support.design.widget.TextInputLayout>
 
         <!-- Password Label -->
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen20"
-            android:layout_marginBottom="@dimen/dimen20">
+            android:layout_marginBottom="@dimen/dimen20"
+            android:layout_marginTop="@dimen/dimen20">
+
             <android.support.design.widget.TextInputEditText
-           android:id="@+id/input_password"
+                android:id="@+id/input_password"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen40"
                 android:background="@drawable/edittextstyle"
+                android:hint="@string/password"
                 android:inputType="textPassword"
-                android:textSize="@dimen/textsize20"
-                android:hint="@string/password"/>
+                android:textSize="@dimen/textsize20" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_login"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen24"
             android:layout_marginTop="@dimen/dimen24"
             android:background="#F08080"
-            android:layout_marginBottom="@dimen/dimen24"
             android:padding="@dimen/dimen12"
-            android:textSize="@dimen/textsize20"
-            android:text="@string/login"/>
+            android:text="@string/login"
+            android:textSize="@dimen/textsize20" />
 
-        <TextView android:id="@+id/link_signup"
+        <TextView
+            android:id="@+id/link_signup"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dimen24"
-            android:text="@string/no_account_yet_create_one"
             android:gravity="center"
-            android:textSize="24sp"/>
+            android:text="@string/no_account_yet_create_one"
+            android:textSize="24sp" />
     </LinearLayout>
 </ScrollView>

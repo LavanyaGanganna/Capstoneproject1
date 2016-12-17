@@ -16,9 +16,9 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        prefs.edit().putBoolean("paypal", false).apply();
-        prefs.edit().putBoolean("isLogin", false).apply();
-        prefs.edit().putBoolean("paylogin", false).apply();
+        prefs.edit().putBoolean(getString(R.string.paypalsh), false).apply();
+        prefs.edit().putBoolean(getString(R.string.islogin), false).apply();
+        prefs.edit().putBoolean(getString(R.string.paylogin), false).apply();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();

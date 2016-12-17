@@ -30,14 +30,14 @@ public class CheckoutFragment extends Fragment implements AdapterView.OnItemSele
     private static final String TAG = CheckoutFragment.class.getSimpleName();
     List<String> payments = new ArrayList<String>();
 
-    TextView pricetext, tax, totalcost, display;
+    TextView pricetext, tax, totalcost;
     double price = 0;
     int itemcnt = 0;
-    String emails;
+
 
     public interface Callbacks {
         /*Callback for when an item has been selected. */
-        public void onItemSelected(String id);
+        void onItemSelected(String id);
     }
 
     Callbacks mcallbacks;
@@ -48,23 +48,23 @@ public class CheckoutFragment extends Fragment implements AdapterView.OnItemSele
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.checkoutfragment, container, false);
         // payments.add("Add Gift Card");
-        payments.add("Paypal");
-        payments.add("Select Payment Method");
+        payments.add(getString(R.string.paypal));
+        payments.add(getString(R.string.paymentmethod));
         Bundle bundle = getArguments();
-        price = bundle.getDouble("price", 0);
-        itemcnt = bundle.getInt("values", 0);
+        price = bundle.getDouble(getString(R.string.price), 0);
+        itemcnt = bundle.getInt(getString(R.string.values), 0);
         // emails=getArguments().getStringExtra("emailaddr");
         pricetext = (TextView) view.findViewById(R.id.priceid);
         tax = (TextView) view.findViewById(R.id.taxid);
         totalcost = (TextView) view.findViewById(R.id.totalprice);
         // display= (TextView) getActivity().findViewById(R.id.displayid);
         StartersListClass startersListClass = new StartersListClass();
-        pricetext.setText(String.format("$%s", startersListClass.getprice()));
+        pricetext.setText(String.format(getString(R.string.dollr) + "%s", startersListClass.getprice()));
         pricetext.setContentDescription(price + getString(R.string.dollar));
-        tax.setText(String.format("$%s", 1.0));
+        tax.setText(String.format(getString(R.string.dollr) + "%s", 1.0));
         tax.setContentDescription(getString(R.string.dollarone));
         double money = price + 1.0;
-        totalcost.setText(String.format("$%s", (startersListClass.getprice() + 1.0)));
+        totalcost.setText(String.format(getString(R.string.dollr) + "%s", (startersListClass.getprice() + 1.0)));
         totalcost.setContentDescription(money + getString(R.string.dollar));
         Spinner spinner = (Spinner) view.findViewById(R.id.spinner);
         HintAdapter adapter = new HintAdapter(getContext(), R.layout.spinner_item, payments);
@@ -73,10 +73,10 @@ public class CheckoutFragment extends Fragment implements AdapterView.OnItemSele
         spinner.setSelection(adapter.getCount());
         spinner.setOnItemSelectedListener(this);
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
-        boolean paypals = sharedPref.getBoolean("paypal", false);
+        boolean paypals = sharedPref.getBoolean(getString(R.string.paypalsh), false);
         if (paypals) {
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-            spinner.setSelection(sharedPreferences.getInt("spinner", adapter.getCount()));
+            spinner.setSelection(sharedPreferences.getInt(getString(R.string.spinner), adapter.getCount()));
 
         }
         return view;
@@ -95,8 +95,8 @@ public class CheckoutFragment extends Fragment implements AdapterView.OnItemSele
                 ids = "true";
                 mcallbacks.onItemSelected(ids);
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-                sharedPreferences.edit().putInt("spinner", i).apply();
-                adapterView.getChildAt(0).setContentDescription("paypal");
+                sharedPreferences.edit().putInt(getString(R.string.spinner), i).apply();
+                adapterView.getChildAt(0).setContentDescription(getString(R.string.paypalsh));
                 break;
 
         }

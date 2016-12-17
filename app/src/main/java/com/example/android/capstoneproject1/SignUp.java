@@ -68,20 +68,20 @@ public class SignUp extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        paypals = sharedPreferences.getBoolean("paypal", false);
+        paypals = sharedPreferences.getBoolean(getString(R.string.paypalsh), false);
         if (paypals) {
-            price = getIntent().getDoubleExtra("price", 0);
+            price = getIntent().getDoubleExtra(getString(R.string.price), 0);
         }
         ButterKnife.inject(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         validate();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        Typeface darllarch = Typeface.createFromAsset(getAssets(), "font/DarkLarch_PERSONAL_USE.ttf");
+        Typeface darllarch = Typeface.createFromAsset(getAssets(), getString(R.string.personalttf));
         TextView mytitle = (TextView) toolbar.getChildAt(0);
         mytitle.setTypeface(darllarch);
         mytitle.setTextSize(30);
-        getSupportActionBar().setTitle("Sign Up");
+        getSupportActionBar().setTitle(R.string.signups);
         boolean tabletsize = getResources().getBoolean(R.bool.isTablet);
         if (tabletsize) {
             mytitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 45);
@@ -104,7 +104,7 @@ public class SignUp extends AppCompatActivity {
     }
 
     private void signupfunc() {
-        Log.d(TAG, "Signup");
+        // Log.d(TAG, "Signup");
         if (!validate()) {
             onSignupFailed();
             return;
@@ -114,7 +114,7 @@ public class SignUp extends AppCompatActivity {
                     R.style.AppTheme);
             progressDialog.setIndeterminate(true);
             progressDialog.setIcon(R.drawable.homelog4);
-            progressDialog.setMessage("Creating Account...");
+            progressDialog.setMessage(getString(R.string.creatingaccnt));
 
             String email = emailtext.getText().toString();
             String pswd = passwdtext.getText().toString();
@@ -127,12 +127,9 @@ public class SignUp extends AppCompatActivity {
         }
     }
 
-    public void onSignupsuccess() {
-
-    }
 
     public void onSignupFailed() {
-        Toast.makeText(getBaseContext(), "Login failed Check Credentials", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), R.string.loginfailed, Toast.LENGTH_LONG).show();
         Toast.makeText(getBaseContext(), errormsg, Toast.LENGTH_LONG).show();
         signup.setEnabled(true);
     }
@@ -155,7 +152,7 @@ public class SignUp extends AppCompatActivity {
 
                 String email = emailtext.getText().toString();
                 if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    emailtext.setError("enter a valid email address");
+                    emailtext.setError(getString(R.string.entervalid));
 
                 } else {
                     emailtext.setError(null);
@@ -180,7 +177,7 @@ public class SignUp extends AppCompatActivity {
                 String pswd = passwdtext.getText().toString();
 
                 if (pswd.isEmpty() || pswd.length() < 4 || pswd.length() > 10) {
-                    passwdtext.setError("between 4 and 10 alphanumeric characters");
+                    passwdtext.setError(getString(R.string.betweenfour));
 
                 } else {
                     passwdtext.setError(null);
@@ -204,7 +201,7 @@ public class SignUp extends AppCompatActivity {
                 String cpswd = confirmpasswd.getText().toString();
 
                 if (!(cpswd.equals(passwdtext.getText().toString()))) {
-                    confirmpasswd.setError("passwords dont match");
+                    confirmpasswd.setError(getString(R.string.passwordsdont));
 
                 } else {
                     confirmpasswd.setError(null);
@@ -236,28 +233,28 @@ public class SignUp extends AppCompatActivity {
 
         boolean emailvalid = isValidEmail(emailtext.getText().toString());
         if (!emailvalid) {
-            errormsg = "not valid email";
+            errormsg = getString(R.string.notvalid);
         }
 
         boolean passvalid = isValidPassword(passwdtext.getText().toString());
         if (!passvalid) {
-            errormsg = "not valid passwd";
+            errormsg = getString(R.string.notvalidpass);
         }
         boolean cpass = isSamepasswd(confirmpasswd.getText().toString(), passwdtext.getText().toString());
         if (!cpass) {
-            errormsg = "password dont match";
+            errormsg = getString(R.string.passdont);
         }
         boolean mobilevalid = isValidmobile(phones.getText().toString());
         if (!mobilevalid) {
-            errormsg = "not valid mobile number";
+            errormsg = getString(R.string.notvalidnum);
         }
         valid = emailvalid && passvalid && cpass && mobilevalid;
         return valid;
     }
 
     private boolean isValidEmail(String email) {
-        String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        String EMAIL_PATTERN = getString(R.string.a_z)
+                + getString(R.string.a_zz);
 
         Pattern pattern = Pattern.compile(EMAIL_PATTERN);
         Matcher matcher = pattern.matcher(email);
@@ -302,7 +299,7 @@ public class SignUp extends AppCompatActivity {
                         // - 10.0.2.2 is localhost's IP address in Android emulator
                         // - turn off compression when running against local devappserver
                         // .setRootUrl("http://10.0.2.2:8080/_ah/api/")
-                        .setRootUrl("https://capstoneproject1-150817.appspot.com/_ah/api/")
+                        .setRootUrl(getString(R.string.appspotsignup))
                         .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
                             @Override
                             public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) throws IOException {
@@ -324,19 +321,12 @@ public class SignUp extends AppCompatActivity {
                 retuser = myApiService.checkUser(email).execute();
 
                 if (retuser == null) {
-                    Log.d(TAG, "null null null");
                     Users users = new Users();
                     users.setEmail(email);
                     users.setPword(pswrd);
                     users.setPhno(phno);
                     Users returnuser = myApiService.insert(users).execute();
                 }
-                //   if(retuser !=null) {
-                //     retid = retuser.getId();
-                //   Log.d(TAG, "the signup id is" + retid);
-
-
-                //usersl=myApiService.list().execute();
 
 
             } catch (IOException e1) {
@@ -350,18 +340,18 @@ public class SignUp extends AppCompatActivity {
         protected void onPostExecute(Users result) {
 //            Toast.makeText(SignUp.this, returnuser.getEmail(), Toast.LENGTH_LONG).show();
             if (result == null)
-                Toast.makeText(SignUp.this, "Account created", Toast.LENGTH_LONG).show();
+                Toast.makeText(SignUp.this, R.string.accntcreat, Toast.LENGTH_LONG).show();
 
             else {
-                Toast.makeText(getApplicationContext(), "User already exists, Please login", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.useralready, Toast.LENGTH_LONG).show();
             }
             signup.setEnabled(true);
             setResult(RESULT_OK, null);
             Intent intent = new Intent(SignUp.this, SignIn.class);
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(SignUp.this);
-            paypals = sharedPreferences.getBoolean("paypal", false);
+            paypals = sharedPreferences.getBoolean(getString(R.string.paypalsh), false);
             if (paypals) {
-                intent.putExtra("price", price);
+                intent.putExtra(getString(R.string.price), price);
             }
             startActivity(intent);
 

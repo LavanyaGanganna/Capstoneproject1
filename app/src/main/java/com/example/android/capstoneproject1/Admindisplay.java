@@ -44,17 +44,17 @@ public class Admindisplay extends AppCompatActivity implements OrdersAdapter.Rec
         progressBar = (ProgressBar) findViewById(R.id.probar);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Log.d(TAG, "inside on create");
+        // Log.d(TAG, "inside on create");
         new EndpointsAsyncTask().execute();
         recyclerView = (RecyclerView) findViewById(R.id.orderslist);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        Typeface darllarch = Typeface.createFromAsset(getAssets(), "font/DarkLarch_PERSONAL_USE.ttf");
+        Typeface darllarch = Typeface.createFromAsset(getAssets(), getString(R.string.personalttf));
         TextView mytitle = (TextView) toolbar.getChildAt(0);
         mytitle.setTypeface(darllarch);
         mytitle.setTextSize(30);
-        getSupportActionBar().setTitle("Admin Display");
+        getSupportActionBar().setTitle(R.string.admindisplay);
         boolean tabletsize = getResources().getBoolean(R.bool.isTablet);
         if (tabletsize) {
             mytitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 45);
@@ -89,7 +89,7 @@ public class Admindisplay extends AppCompatActivity implements OrdersAdapter.Rec
                         // - 10.0.2.2 is localhost's IP address in Android emulator
                         // - turn off compression when running against local devappserver
                         // .setRootUrl("http://10.0.2.2:8080/_ah/api/")
-                        .setRootUrl("https://capstoneproject1-150817.appspot.com/_ah/api/")
+                        .setRootUrl(getString(R.string.appspot))
                         .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
                             @Override
                             public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) throws IOException {
@@ -102,7 +102,7 @@ public class Admindisplay extends AppCompatActivity implements OrdersAdapter.Rec
             }
 
             try {
-                Log.d(TAG, "inside the async task");
+                // Log.d(TAG, "inside the async task");
 
                 collectionResponseOrders = myApiService.list().execute();
                 ordersArrayList = collectionResponseOrders.getItems();
@@ -110,17 +110,17 @@ public class Admindisplay extends AppCompatActivity implements OrdersAdapter.Rec
                     for (int i = 0; i < ordersArrayList.size(); i++) {
                         List<String> titlesend = new ArrayList<>();
                         String email = ordersArrayList.get(i).getEmailaddr();
-                        Log.d(TAG, "the backend order list" + email);
+                        //   Log.d(TAG, "the backend order list" + email);
                         List<String> titleprice = ordersArrayList.get(i).getTitle();
                         List<String> pricetitle = ordersArrayList.get(i).getPrice();
                         for (int j = 0; j < titleprice.size(); j++) {
                             String titles = titleprice.get(j) + "      " + pricetitle.get(j);
-                            Log.d(TAG, "the backend " + titles);
+                            //       Log.d(TAG, "the backend " + titles);
                             titlesend.add(titles);
                         }
                         String totalcost = ordersArrayList.get(i).getTotalprice();
-                        totalcost = String.format("%1s  %2s", "TotalCost:", totalcost);
-                        Log.d(TAG, "the backend cost" + totalcost);
+                        totalcost = String.format("%1s %2s", getString(R.string.totalcost), totalcost);
+                        //  Log.d(TAG, "the backend cost" + totalcost);
                         Ordersclass ordersclass = new Ordersclass(email, titlesend, totalcost);
                         displaylist.add(ordersclass);
                     }

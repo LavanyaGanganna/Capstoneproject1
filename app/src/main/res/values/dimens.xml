@@ -6,7 +6,7 @@
     <dimen name="widget_default_height">40dp</dimen>
     <dimen name="widget_min_resize_width">40dp</dimen>
     <dimen name="widget_min_resize_height">40dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
+
     <dimen name="dimen55">55dp</dimen>
     <dimen name="dimen0">0dp</dimen>
     <dimen name="dimen280">280dp</dimen>
@@ -61,4 +61,8 @@
     <dimen name="dimen155">155dp</dimen>
     <dimen name="dimen180">180dp</dimen>
     <dimen name="textsize29">29sp</dimen>
+    <dimen name="dimen250">250dp</dimen>
+    <dimen name="dimen35">35dp</dimen>
+    <dimen name="textsize14">14sp</dimen>
+    <dimen name="dimen220">220dp</dimen>
 </resources>

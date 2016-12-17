@@ -78,9 +78,9 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConne
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        paypals = sharedPreferences.getBoolean("paypal", false);
+        paypals = sharedPreferences.getBoolean(getString(R.string.paypalsh), false);
         if (paypals) {
-            price = getIntent().getDoubleExtra("price", 0);
+            price = getIntent().getDoubleExtra(getString(R.string.price), 0);
         }
         ButterKnife.inject(this);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -105,11 +105,11 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConne
         });
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        Typeface darllarch = Typeface.createFromAsset(getAssets(), "font/DarkLarch_PERSONAL_USE.ttf");
+        Typeface darllarch = Typeface.createFromAsset(getAssets(), getString(R.string.personalttf));
         TextView mytitle = (TextView) toolbar.getChildAt(0);
         mytitle.setTypeface(darllarch);
         mytitle.setTextSize(30);
-        getSupportActionBar().setTitle("Sign In");
+        getSupportActionBar().setTitle(R.string.signins);
         boolean tabletsize = getResources().getBoolean(R.bool.isTablet);
         if (tabletsize) {
             mytitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 45);
@@ -148,9 +148,9 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConne
                 // Start the Signup activity
                 Intent intent = new Intent(getApplicationContext(), SignUp.class);
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(SignIn.this);
-                paypals = sharedPreferences.getBoolean("paypal", false);
+                paypals = sharedPreferences.getBoolean(getString(R.string.paypalsh), false);
                 if (paypals) {
-                    intent.putExtra("price", price);
+                    intent.putExtra(getString(R.string.price), price);
                 }
                 startActivityForResult(intent, REQUEST_SIGNUP);
             }
@@ -201,9 +201,9 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConne
                 // By default we just finish the Activity and log them in automatically
                 Intent intent = new Intent(SignIn.this, SignIn.class);
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(SignIn.this);
-                paypals = sharedPreferences.getBoolean("paypal", false);
+                paypals = sharedPreferences.getBoolean(getString(R.string.paypalsh), false);
                 if (paypals) {
-                    intent.putExtra("price", getIntent().getDoubleExtra("price", 0));
+                    intent.putExtra(getString(R.string.price), getIntent().getDoubleExtra(getString(R.string.price), 0));
                 }
                 startActivity(intent);
 
@@ -230,30 +230,30 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConne
                 new GoogleAsyncTask().execute(email, null, null);
             }
         } else {
-            Toast.makeText(this, "Unable to use Google Signin", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.unablegoogle, Toast.LENGTH_LONG).show();
         }
     }
 
     public void onLoginSuccess() {
-        Toast.makeText(getApplicationContext(), "Login success", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), R.string.loginsuce, Toast.LENGTH_SHORT).show();
         loginButton.setEnabled(true);
         isLogin = true;
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        sharedPreferences.edit().putBoolean("isLogin", isLogin).apply();
-        sharedPreferences.edit().putString("emailaddr", email).apply();
+        sharedPreferences.edit().putBoolean(getString(R.string.islogin), isLogin).apply();
+        sharedPreferences.edit().putString(getString(R.string.emailaddr), email).apply();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        paypals = prefs.getBoolean("paypal", false);
+        paypals = prefs.getBoolean(getString(R.string.paypalsh), false);
         if (paypals) {
 
             //   double amount=getIntent().getDoubleExtra("price",0);
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-            preferences.edit().putBoolean("paylogin", true).apply();
+            preferences.edit().putBoolean(getString(R.string.paylogin), true).apply();
             Intent intentcheck = new Intent(SignIn.this, Checkout.class);
-            intentcheck.putExtra("price", price);
+            intentcheck.putExtra(getString(R.string.price), price);
             startActivity(intentcheck);
         }
         if (email != null && password != null) {
-            if (email.equals("admin@redchillies.com") && (password.equals("mannam"))) {
+            if (email.equals(getString(R.string.adminss)) && (password.equals(getString(R.string.mannamspass)))) {
                 Intent intent = new Intent(SignIn.this, Admindisplay.class);
                 startActivity(intent);
             }
@@ -278,7 +278,7 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConne
             public void afterTextChanged(Editable editable) {
                 String email = emailText.getText().toString();
                 if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    emailText.setError("enter a valid email address");
+                    emailText.setError(getString(R.string.validemail));
 
                 } else {
                     emailText.setError(null);
@@ -300,7 +300,7 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConne
             public void afterTextChanged(Editable editable) {
                 String password = passwordText.getText().toString();
                 if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
-                    passwordText.setError("enter between 4 to 10 characters");
+                    passwordText.setError(getString(R.string.enterfour));
 
                 } else {
                     passwordText.setError(null);
@@ -316,14 +316,14 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConne
         Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
         AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
 
-        dlgAlert.setMessage("wrong password or username");
-        dlgAlert.setTitle("Error Message...");
-        dlgAlert.setPositiveButton("OK", null);
+        dlgAlert.setMessage(R.string.wrongpassword);
+        dlgAlert.setTitle(R.string.errorrr);
+        dlgAlert.setPositiveButton(R.string.oks, null);
         dlgAlert.setCancelable(true);
         dlgAlert.create().show();
 
 
-        dlgAlert.setPositiveButton("Ok",
+        dlgAlert.setPositiveButton(R.string.okk,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -353,7 +353,7 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConne
                         // - 10.0.2.2 is localhost's IP address in Android emulator
                         // - turn off compression when running against local devappserver
                         // .setRootUrl("http://10.0.2.2:8080/_ah/api/")
-                        .setRootUrl("https://capstoneproject1-150817.appspot.com/_ah/api/")
+                        .setRootUrl(getString(R.string.appspotsign))
                         .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
                             @Override
                             public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) throws IOException {
@@ -399,12 +399,12 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConne
             if (progressBar != null)
                 progressBar.setVisibility(View.GONE);
             if (result[0] == null) {
-                Toast.makeText(SignIn.this, "Not a member please SignUp", Toast.LENGTH_LONG).show();
+                Toast.makeText(SignIn.this, R.string.notmember, Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(SignIn.this, SignUp.class);
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(SignIn.this);
-                paypals = sharedPreferences.getBoolean("paypal", false);
+                paypals = sharedPreferences.getBoolean(getString(R.string.paypalsh), false);
                 if (paypals) {
-                    intent.putExtra("price", price);
+                    intent.putExtra(getString(R.string.price), price);
                 }
                 startActivityForResult(intent, REQUEST_SIGNUP);
                 //finish();
@@ -432,7 +432,7 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConne
                         // - 10.0.2.2 is localhost's IP address in Android emulator
                         // - turn off compression when running against local devappserver
                         // .setRootUrl("http://10.0.2.2:8080/_ah/api/")
-                        .setRootUrl("https://capstoneproject1-150817.appspot.com/_ah/api/")
+                        .setRootUrl(getString(R.string.appspotsignins))
                         .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
                             @Override
                             public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) throws IOException {
@@ -454,19 +454,12 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConne
                 retuser = myApiService.checkUser(email).execute();
 
                 if (retuser == null) {
-                    Log.d(TAG, "null null null");
                     Users users = new Users();
                     users.setEmail(email);
                     users.setPword(pswrd);
                     users.setPhno(phno);
                     Users returnuser = myApiService.insert(users).execute();
                 }
-                //   if(retuser !=null) {
-                //     retid = retuser.getId();
-                //   Log.d(TAG, "the signup id is" + retid);
-
-
-                //usersl=myApiService.list().execute();
 
 
             } catch (IOException e1) {
@@ -480,9 +473,9 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConne
         protected void onPostExecute(Users result) {
 //            Toast.makeText(SignUp.this, returnuser.getEmail(), Toast.LENGTH_LONG).show();
             if (result == null) {
-                Toast.makeText(SignIn.this, "Account created", Toast.LENGTH_LONG).show();
+                Toast.makeText(SignIn.this, R.string.acntcreat, Toast.LENGTH_LONG).show();
             } else {
-                Toast.makeText(SignIn.this, "Login success", Toast.LENGTH_LONG).show();
+                Toast.makeText(SignIn.this, R.string.loginsuc, Toast.LENGTH_LONG).show();
             }
             onLoginSuccess();
 

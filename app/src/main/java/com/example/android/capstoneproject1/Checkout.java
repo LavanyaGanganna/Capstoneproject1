@@ -32,22 +32,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.wallet.Cart;
-import com.google.android.gms.wallet.FullWallet;
-import com.google.android.gms.wallet.FullWalletRequest;
-import com.google.android.gms.wallet.LineItem;
-import com.google.android.gms.wallet.MaskedWallet;
-import com.google.android.gms.wallet.MaskedWalletRequest;
-import com.google.android.gms.wallet.NotifyTransactionStatusRequest;
-import com.google.android.gms.wallet.Wallet;
-import com.google.android.gms.wallet.WalletConstants;
-import com.google.android.gms.wallet.fragment.SupportWalletFragment;
-import com.google.android.gms.wallet.fragment.WalletFragmentInitParams;
-import com.google.android.gms.wallet.fragment.WalletFragmentMode;
-import com.google.android.gms.wallet.fragment.WalletFragmentOptions;
-import com.google.android.gms.wallet.fragment.WalletFragmentStyle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,38 +54,36 @@ public class Checkout extends AppCompatActivity implements CheckoutFragment.Call
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
-        price = getIntent().getDoubleExtra("price", 0);
-        itemcnt = getIntent().getIntExtra("values", 0);
-        recvdstring = getIntent().getStringExtra("totalcost");
+        price = getIntent().getDoubleExtra(getString(R.string.price), 0);
+        itemcnt = getIntent().getIntExtra(getString(R.string.values), 0);
+        recvdstring = getIntent().getStringExtra(getString(R.string.total));
         display = (TextView) findViewById(R.id.displayid);
-        // display.setText(String.format(Locale.ENGLISH,"%1$d items | $ %2$," +
-        //                       ".2f",itemcnt,price));
         display.setText(recvdstring);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean paylogin = prefs.getBoolean("paylogin", false);
+        boolean paylogin = prefs.getBoolean(getString(R.string.paylogin), false);
         if (paylogin) {
             StartersListClass startersListClass = new StartersListClass();
-            String displays = String.format(Locale.ENGLISH, "%d items | $ %.2f", startersListClass.getsize(), startersListClass.getprice());
+            String displays = String.format(Locale.ENGLISH, "%d " + getString(R.string.item) + "%.2f", startersListClass.getsize(), startersListClass.getprice());
             display.setText(displays);
             SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-            pref.edit().putBoolean("paylogin", false).apply();
+            pref.edit().putBoolean(getString(R.string.paylogin), false).apply();
         }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Typeface darllarch = Typeface.createFromAsset(getAssets(), "font/DarkLarch_PERSONAL_USE.ttf");
+        Typeface darllarch = Typeface.createFromAsset(getAssets(), getString(R.string.personalttf));
         TextView mytitle = (TextView) toolbar.getChildAt(0);
         mytitle.setTypeface(darllarch);
         mytitle.setTextSize(30);
-        getSupportActionBar().setTitle("Checkout");
+        getSupportActionBar().setTitle(getString(R.string.checkout));
         boolean tabletsize = getResources().getBoolean(R.bool.isTablet);
         if (tabletsize) {
             mytitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 45);
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Bundle bundle = new Bundle();
-        bundle.putDouble("price", price);
-        bundle.putInt("values", itemcnt);
+        bundle.putDouble(getString(R.string.price), price);
+        bundle.putInt(getString(R.string.values), itemcnt);
         CheckoutFragment checkoutFragment = new CheckoutFragment();
         checkoutFragment.setArguments(bundle);
         paypalFragment = new PaypalFragment();
@@ -127,10 +109,10 @@ public class Checkout extends AppCompatActivity implements CheckoutFragment.Call
         switch (item.getItemId()) {
             case android.R.id.home:
                 Intent returnIntent = new Intent();
-                returnIntent.putExtra("price", price);
-                returnIntent.putExtra("values", itemcnt);
+                returnIntent.putExtra(getString(R.string.price), price);
+                returnIntent.putExtra(getString(R.string.values), itemcnt);
                 SharedPreferences Preferences = PreferenceManager.getDefaultSharedPreferences(this);
-                Preferences.edit().putBoolean("backpress", true).apply();
+                Preferences.edit().putBoolean(getString(R.string.backpress), true).apply();
                 setResult(RESULT_OK, returnIntent);
                 finish();
                 break;
@@ -142,12 +124,12 @@ public class Checkout extends AppCompatActivity implements CheckoutFragment.Call
                     sharebody = sharebody + StartersListClass.starterclasses.get(i).getTitles() + "--" + StartersListClass.starterclasses.get(i).getPrices() + "\n";
                 }
                 double prices = price + 1.0;
-                shareintent.setType("text/plain");
-                sharebody = sharebody + "\n" + "Subtotal:" + price + "\n" + "Tax:" + "$1.00" + "\n" +
-                        "Total price: " + "$" + Double.toString(prices) + "\n";
+                shareintent.setType(getString(R.string.textplain));
+                sharebody = sharebody + "\n" + getString(R.string.subtotal) + price + "\n" + getString(R.string.tax) + getString(R.string.onedollar) + "\n" +
+                        getString(R.string.totalprice) + "$" + Double.toString(prices) + "\n";
                 sharebody = sharebody + FOOD_SHARE_HASHTAG;
                 shareintent.putExtra(Intent.EXTRA_TEXT, sharebody);
-                startActivity(Intent.createChooser(shareintent, "share via"));
+                startActivity(Intent.createChooser(shareintent, getString(R.string.sharevia)));
                 break;
 
             default:
@@ -166,15 +148,16 @@ public class Checkout extends AppCompatActivity implements CheckoutFragment.Call
         int sizes = StartersListClass.starterclasses.size();
         if (sizes != 0) {
             ui_hot.setVisibility(View.VISIBLE);
-            ui_hot.setText(Integer.toString(sizes));
+            // ui_hot.setText(Integer.toString(sizes));
+            ui_hot.setText(String.format(Locale.ENGLISH, "%d", sizes));
         }
         menulayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Checkout.this, ViewSummary.class);
-                intent.putExtra("totalcost", recvdstring);
-                intent.putExtra("price", price);
-                intent.putExtra("values", itemcnt);
+                intent.putExtra(getString(R.string.total), recvdstring);
+                intent.putExtra(getString(R.string.price), price);
+                intent.putExtra(getString(R.string.values), itemcnt);
 
                 startActivity(intent);
             }
@@ -184,7 +167,7 @@ public class Checkout extends AppCompatActivity implements CheckoutFragment.Call
         if (mshareactionprovider != null) {
             mshareactionprovider.setShareIntent(shareintent);
         } else {
-            Log.d(TAG, "share action provider is null");
+            Log.d(TAG, getString(R.string.shareaction));
         }
 
         Drawable drawable = menu.getItem(0).getIcon();

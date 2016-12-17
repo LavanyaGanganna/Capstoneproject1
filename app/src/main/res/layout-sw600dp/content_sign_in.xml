@@ -16,6 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dimen100"
             android:layout_marginBottom="@dimen/dimen24"
+            android:contentDescription="@string/redchils"
             android:layout_gravity="center_horizontal" />
         <com.google.android.gms.common.SignInButton
             android:id="@+id/sign_in_button"

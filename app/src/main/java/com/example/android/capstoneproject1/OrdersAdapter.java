@@ -36,7 +36,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
     Context mcontext;
 
     public interface Recyclerviewcallback {
-        public void itemclicked(List<Ordersclass> ordersclassList);
+        void itemclicked(List<Ordersclass> ordersclassList);
     }
 
     Recyclerviewcallback recyclerviewcallback;
@@ -58,8 +58,8 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.emailtext.setText(mordersclassList.get(position).getEmailaddr());
         List<String> titlelist = mordersclassList.get(holder.getAdapterPosition()).getTitles();
-        Log.d(TAG, "the email is" + mordersclassList.get(position).getEmailaddr());
-        Log.d(TAG, "the position is" + position);
+        //Log.d(TAG, "the email is" + mordersclassList.get(position).getEmailaddr());
+        //Log.d(TAG, "the position is" + position);
         for (int j = 0; j < titlelist.size(); j++)
             Log.d(TAG, titlelist.get(j));
         holder.linearlayout.setOrientation(LinearLayout.VERTICAL);
@@ -120,7 +120,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                         // - 10.0.2.2 is localhost's IP address in Android emulator
                         // - turn off compression when running against local devappserver
                         // .setRootUrl("http://10.0.2.2:8080/_ah/api/")
-                        .setRootUrl("https://capstoneproject1-150817.appspot.com/_ah/api/")
+                        .setRootUrl(mcontext.getString(R.string.orderappspot))
                         .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
                             @Override
                             public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) throws IOException {

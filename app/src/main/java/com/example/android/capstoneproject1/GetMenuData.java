@@ -1,8 +1,11 @@
 package com.example.android.capstoneproject1;
 
+
 import android.content.Context;
+import android.content.Loader;
 import android.database.Cursor;
 import android.os.AsyncTask;
+import android.os.Bundle;
 
 import com.example.lavanya.myapplication.backend.usersApi.model.Users;
 
@@ -23,15 +26,19 @@ public class GetMenuData {
         mcontext = context;
     }
 
-    public void getcursor() {
+    public void getcursor(Cursor cursor) {
+
         cursorAsyncTask cursorTask = new cursorAsyncTask();
-        cursorTask.execute();
+        cursorTask.execute(cursor);
     }
 
-    public class cursorAsyncTask extends AsyncTask<Void, Void, Void> {
+
+    public class cursorAsyncTask extends AsyncTask<Cursor, Void, Void> {
+
+        // Cursor cursor = mcontext.getContentResolver().query(MenuTableContract.MenuEntry.CONTENT_URI, null, null, null, null);
         @Override
-        protected Void doInBackground(Void... voids) {
-            Cursor cursor = mcontext.getContentResolver().query(MenuTableContract.MenuEntry.CONTENT_URI, null, null, null, null);
+        protected Void doInBackground(Cursor... cursors) {
+            Cursor cursor = cursors[0];
             if (cursor != null && cursor.moveToFirst()) {
                 do {
                     imageno = cursor.getInt(cursor.getColumnIndexOrThrow(MenuTableContract.MenuEntry.COLUMN_FIRST_VAL));
@@ -46,11 +53,9 @@ public class GetMenuData {
             }
             return null;
         }
-
-
     }
 
-    public int getimage(int imageno) {
+    private int getimage(int imageno) {
         int images = 0;
         switch (imageno) {
             case 300:

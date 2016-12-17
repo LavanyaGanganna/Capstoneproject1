@@ -20,6 +20,7 @@
             android:src="@drawable/beefcut"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
+            android:contentDescription="@string/beef"
             android:id="@+id/poster"/>
         <TextView
             android:layout_width="wrap_content"

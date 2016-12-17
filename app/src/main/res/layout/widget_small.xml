@@ -1,25 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:weightSum="10"
+    android:background="@drawable/touch_selector_white"
+    android:id="@+id/widget"
+    android:orientation="vertical"
     android:padding="@dimen/dimen8">
 
     <LinearLayout
-        android:id="@+id/widget"
+
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/touch_selector_white"
-        android:orientation="vertical"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:gravity="center"
+        android:orientation="horizontal"
         android:padding="@dimen/dimen4">
 
         <ImageView
             android:id="@+id/widget_icon"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dimen20"
+            android:layout_marginEnd="@dimen/dimen20"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
-            android:contentDescription="@string/redchillies"
+            android:contentDescription="@string/redchils"
             tools:src="@drawable/redchillies" />
 
         <TextView
@@ -29,7 +35,16 @@
             android:layout_gravity="center_horizontal"
             android:fontFamily="sans-serif"
             android:text="@string/redchillies"
-            android:textSize="@dimen/textsize12"
+            android:textSize="@dimen/textsize16"
             android:textColor="@android:color/holo_red_light" />
     </LinearLayout>
-</FrameLayout>
+    <ListView
+        android:id="@+id/widget_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        tools:listitem="@layout/widget_detail_list_item">
+    </ListView>
+</LinearLayout>

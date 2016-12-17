@@ -21,39 +21,44 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_margin="@dimen/dimen10"
                 android:gravity="center"
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
+                android:text="@string/fulladdress"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/textsize24"
-                android:text="@string/fulladdress">
+                android:textSize="@dimen/textsize24">
+
             </TextView>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen10"
                 android:orientation="horizontal">
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/dimen65"
-                android:text="@string/call_now"
-                android:src="@drawable/phones"
-                android:id="@+id/call"
-                android:layout_marginRight="@dimen/dimen20"
-                android:layout_marginEnd="@dimen/dimen20"
-                android:layout_marginLeft="@dimen/dimen10"
-                android:layout_marginStart="@dimen/dimen10"
-                android:contentDescription="@string/call_now"
-                android:background="@drawable/roundbutton" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen10"
-                android:textSize="@dimen/textsize20"
-                android:textColor="@android:color/black"
-                android:text="@string/telno"/>
+
+                <ImageButton
+                    android:id="@+id/call"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimen65"
+                    android:layout_marginEnd="@dimen/dimen20"
+                    android:layout_marginLeft="@dimen/dimen10"
+                    android:layout_marginRight="@dimen/dimen20"
+                    android:layout_marginStart="@dimen/dimen10"
+                    android:background="@drawable/roundbutton"
+                    android:contentDescription="@string/call_now"
+                    android:src="@drawable/phones"
+                    android:text="@string/call_now" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen10"
+                    android:text="@string/telno"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/textsize20" />
             </LinearLayout>
         </LinearLayout>
 

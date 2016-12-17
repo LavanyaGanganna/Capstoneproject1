@@ -49,27 +49,27 @@ public class Vegetarian extends AppCompatActivity implements StartersAdapter.Dat
         cartbutton = (Button) findViewById(R.id.viewcart);
         textView = (TextView) findViewById(R.id.ordertext);
         StartersListClass startersListClass = new StartersListClass();
-        textView.setText(String.format(Locale.ENGLISH, "%d item | $ %.2f", startersListClass.getsize(), startersListClass.getprice()));
+        textView.setText(String.format(Locale.ENGLISH, "%d " + getString(R.string.item) + "%.2f", startersListClass.getsize(), startersListClass.getprice()));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         StartersAdapter startersAdapter = new StartersAdapter(Vegetarian.this, vegcurrylist, itemcnt, price);
         recyclerView.setAdapter(startersAdapter);
         startersAdapter.notifyDataSetChanged();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        Typeface darllarch = Typeface.createFromAsset(getAssets(), "font/DarkLarch_PERSONAL_USE.ttf");
+        Typeface darllarch = Typeface.createFromAsset(getAssets(), getString(R.string.personalttf));
         TextView mytitle = (TextView) toolbar.getChildAt(0);
         mytitle.setTypeface(darllarch);
         mytitle.setTextSize(30);
-        getSupportActionBar().setTitle("Veggies");
+        getSupportActionBar().setTitle(R.string.vegs);
 
         cartbutton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Vegetarian.this, ViewSummary.class);
-                intent.putExtra("values", itemcnt);
-                intent.putExtra("price", price);
-                intent.putExtra("totalcost", recvdstring);
+                intent.putExtra(getString(R.string.values), itemcnt);
+                intent.putExtra(getString(R.string.price), price);
+                intent.putExtra(getString(R.string.total), recvdstring);
                 startActivityForResult(intent, 5);
             }
         });
@@ -82,7 +82,8 @@ public class Vegetarian extends AppCompatActivity implements StartersAdapter.Dat
         recvdstring = sending;
         if (itemcnt != 0) {
             ui_hot.setVisibility(View.VISIBLE);
-            ui_hot.setText(Integer.toString(itemcnt));
+            //ui_hot.setText(Integer.toString(itemcnt));
+            ui_hot.setText(String.format(Locale.ENGLISH, "%d", itemcnt));
             ui_hot.setContentDescription(Integer.toString(itemcnt) + getString(R.string.itemselected));
         } else {
             ui_hot.setVisibility(View.GONE);
@@ -100,16 +101,17 @@ public class Vegetarian extends AppCompatActivity implements StartersAdapter.Dat
         int sizes = StartersListClass.starterclasses.size();
         if (sizes != 0) {
             ui_hot.setVisibility(View.VISIBLE);
-            ui_hot.setText(Integer.toString(sizes));
+            //  ui_hot.setText(Integer.toString(sizes));
+            ui_hot.setText(String.format(Locale.ENGLISH, "%d", sizes));
             ui_hot.setContentDescription(Integer.toString(sizes) + getString(R.string.itemselected));
         }
         menulayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Vegetarian.this, ViewSummary.class);
-                intent.putExtra("totalcost", recvdstring);
-                intent.putExtra("price", price);
-                intent.putExtra("values", itemcnt);
+                intent.putExtra(getString(R.string.total), recvdstring);
+                intent.putExtra(getString(R.string.price), price);
+                intent.putExtra(getString(R.string.values), itemcnt);
 
                 startActivity(intent);
             }
@@ -126,13 +128,14 @@ public class Vegetarian extends AppCompatActivity implements StartersAdapter.Dat
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 5) {
             if (resultCode == RESULT_OK) {
-                Log.d(TAG, "inside onActivityresult");
-                price = data.getDoubleExtra("price", 0);
-                itemcnt = data.getIntExtra("values", 0);
-                recvdstring = data.getStringExtra("totalcost");
+                //Log.d(TAG, "inside onActivityresult");
+                price = data.getDoubleExtra(getString(R.string.price), 0);
+                itemcnt = data.getIntExtra(getString(R.string.values), 0);
+                recvdstring = data.getStringExtra(getString(R.string.total));
                 if (itemcnt != 0) {
                     ui_hot.setVisibility(View.VISIBLE);
-                    ui_hot.setText(Integer.toString(itemcnt));
+                    //ui_hot.setText(Integer.toString(itemcnt));
+                    ui_hot.setText(String.format(Locale.ENGLISH, "%d", itemcnt));
                     ui_hot.setContentDescription(Integer.toString(itemcnt) + getString(R.string.itemselected));
                 } else {
                     ui_hot.setVisibility(View.GONE);
@@ -146,11 +149,11 @@ public class Vegetarian extends AppCompatActivity implements StartersAdapter.Dat
     @Override
     public void onBackPressed() {
         Intent returnIntent = new Intent();
-        returnIntent.putExtra("values", itemcnt);
-        returnIntent.putExtra("price", price);
-        returnIntent.putExtra("totalcost", recvdstring);
+        returnIntent.putExtra(getString(R.string.values), itemcnt);
+        returnIntent.putExtra(getString(R.string.price), price);
+        returnIntent.putExtra(getString(R.string.total), recvdstring);
         SharedPreferences Preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        Preferences.edit().putBoolean("backpress", true).apply();
+        Preferences.edit().putBoolean(getString(R.string.backpress), true).apply();
         setResult(RESULT_OK, returnIntent);
         finish();
         super.onBackPressed();
@@ -162,11 +165,11 @@ public class Vegetarian extends AppCompatActivity implements StartersAdapter.Dat
         int id = item.getItemId();
         if (id == android.R.id.home) {
             Intent returnIntent = new Intent();
-            returnIntent.putExtra("values", itemcnt);
-            returnIntent.putExtra("price", price);
-            returnIntent.putExtra("totalcost", recvdstring);
+            returnIntent.putExtra(getString(R.string.values), itemcnt);
+            returnIntent.putExtra(getString(R.string.price), price);
+            returnIntent.putExtra(getString(R.string.total), recvdstring);
             SharedPreferences Preferences = PreferenceManager.getDefaultSharedPreferences(this);
-            Preferences.edit().putBoolean("backpress", true).apply();
+            Preferences.edit().putBoolean(getString(R.string.backpress), true).apply();
             setResult(RESULT_OK, returnIntent);
             finish();
             return true;

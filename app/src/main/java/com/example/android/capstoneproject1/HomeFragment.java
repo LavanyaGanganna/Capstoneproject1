@@ -1,12 +1,16 @@
 package com.example.android.capstoneproject1;
 
 import android.app.Activity;
+import android.support.v4.app.LoaderManager;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.CursorLoader;
 import android.content.Intent;
+import android.content.Loader;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.location.Criteria;
@@ -39,6 +43,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Locale;
+
+import data.MenuTableContract;
 
 import static android.content.ContentValues.TAG;
 
@@ -68,7 +75,7 @@ public class HomeFragment extends Fragment {
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         lists = (ListView) view.findViewById(R.id.lists);
         mProgressDialog = new ProgressDialog(getContext());
-        mProgressDialog.setTitle("Baking Appam");
+        mProgressDialog.setTitle(getString(R.string.bakingappam));
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         mProgressDialog.setCancelable(false);
         getActivity().runOnUiThread(new Runnable() {
@@ -76,15 +83,15 @@ public class HomeFragment extends Fragment {
             public void run() {
                 boolean bigtabletsize = getResources().getBoolean(R.bool.isbigTablet);
                 if (bigtabletsize) {
-                    navItems.add(new NavItems("Order", R.drawable.waiterbig));
-                    navItems.add(new NavItems("Location", R.drawable.markerbig));
-                    navItems.add(new NavItems("Our Menu", R.drawable.restaurantbig));
-                    navItems.add(new NavItems("Contact", R.drawable.phonebig));
+                    navItems.add(new NavItems(getString(R.string.orders), R.drawable.waiterbig));
+                    navItems.add(new NavItems(getString(R.string.locations), R.drawable.markerbig));
+                    navItems.add(new NavItems(getString(R.string.ourmenus), R.drawable.restaurantbig));
+                    navItems.add(new NavItems(getString(R.string.contacts), R.drawable.phonebig));
                 } else {
-                    navItems.add(new NavItems("Order", R.drawable.waiter));
-                    navItems.add(new NavItems("Location", R.drawable.marker));
-                    navItems.add(new NavItems("Our Menu", R.drawable.rstaurant));
-                    navItems.add(new NavItems("Contact", R.drawable.phone));
+                    navItems.add(new NavItems(getString(R.string.orders), R.drawable.waiter));
+                    navItems.add(new NavItems(getString(R.string.locations), R.drawable.marker));
+                    navItems.add(new NavItems(getString(R.string.ourmenus), R.drawable.rstaurant));
+                    navItems.add(new NavItems(getString(R.string.contacts), R.drawable.phone));
                 }
                 DrawerAdapter drawerAdapter = new DrawerAdapter(getContext(), navItems);
                 lists.setAdapter(drawerAdapter);
@@ -99,23 +106,23 @@ public class HomeFragment extends Fragment {
                             public void run() {
                                 if (i == 0) {
                                     Intent intent = new Intent(getContext(), OurMenu.class);
-                                    intent.putExtra("values", itemcnt);
-                                    intent.putExtra("price", price);
-                                    intent.putExtra("totalcost", rcvdstring);
+                                    intent.putExtra(getString(R.string.values), itemcnt);
+                                    intent.putExtra(getString(R.string.price), price);
+                                    intent.putExtra(getString(R.string.total), rcvdstring);
                                     startActivityForResult(intent, 2);
                                     mProgressDialog.dismiss();
                                 } else if (i == 1) {
                                     Intent intent = new Intent(getContext(), LocateActivity.class);
-                                    intent.putExtra("values", itemcnt);
-                                    intent.putExtra("price", price);
-                                    intent.putExtra("totalcost", rcvdstring);
+                                    intent.putExtra(getString(R.string.values), itemcnt);
+                                    intent.putExtra(getString(R.string.price), price);
+                                    intent.putExtra(getString(R.string.total), rcvdstring);
                                     startActivityForResult(intent, 6);
                                     mProgressDialog.dismiss();
                                 } else if (i == 2) {
                                     Intent intent = new Intent(getContext(), OurMenu.class);
-                                    intent.putExtra("values", itemcnt);
-                                    intent.putExtra("price", price);
-                                    intent.putExtra("totalcost", rcvdstring);
+                                    intent.putExtra(getString(R.string.values), itemcnt);
+                                    intent.putExtra(getString(R.string.price), price);
+                                    intent.putExtra(getString(R.string.total), rcvdstring);
                                     startActivityForResult(intent, 3);
                                     mProgressDialog.dismiss();
                                 } else if (i == 3) {
@@ -226,7 +233,8 @@ public class HomeFragment extends Fragment {
         int sizes = StartersListClass.starterclasses.size();
         if (sizes != 0) {
             ui_hot.setVisibility(View.VISIBLE);
-            ui_hot.setText(Integer.toString(sizes));
+            // ui_hot.setText(Integer.toString(sizes));
+            ui_hot.setText(String.format(Locale.ENGLISH, "%d", sizes));
             ui_hot.setContentDescription(Integer.toString(sizes) + getString(R.string.itemselected));
         }
         Drawable drawable = menu.getItem(0).getIcon();
@@ -235,16 +243,13 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), ViewSummary.class);
-                intent.putExtra("summary", selectedlist);
-                intent.putExtra("price", price);
-                intent.putExtra("totalcost", rcvdstring);
+                intent.putExtra(getString(R.string.summary), selectedlist);
+                intent.putExtra(getString(R.string.price), price);
+                intent.putExtra(getString(R.string.total), rcvdstring);
                 startActivity(intent);
             }
         });
-        boolean tabletsize = getResources().getBoolean(R.bool.isTablet);
-        if (tabletsize) {
 
-        }
         drawable.setColorFilter(getResources().getColor(R.color.colorwhite), PorterDuff.Mode.SRC_IN);
         drawable1.setColorFilter(getResources().getColor(R.color.colorwhite), PorterDuff.Mode.SRC_IN);
 
@@ -255,13 +260,14 @@ public class HomeFragment extends Fragment {
         //  super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 2) {
             if (resultCode == Activity.RESULT_OK) {
-                int value = data.getIntExtra("values", 0);
-                rcvdstring = data.getStringExtra("totalcost");
-                price = data.getDoubleExtra("price", 0);
+                int value = data.getIntExtra(getString(R.string.values), 0);
+                rcvdstring = data.getStringExtra(getString(R.string.total));
+                price = data.getDoubleExtra(getString(R.string.price), 0);
                 itemcnt = value;
                 if (value != 0) {
                     ui_hot.setVisibility(View.VISIBLE);
-                    ui_hot.setText(Integer.toString(value));
+                    //    ui_hot.setText(Integer.toString(value));
+                    ui_hot.setText(String.format(Locale.ENGLISH, "%d", value));
                     ui_hot.setContentDescription(Integer.toString(value) + getString(R.string.itemselected));
                 }
             }
@@ -269,27 +275,29 @@ public class HomeFragment extends Fragment {
 
         if (requestCode == 6) {
             if (resultCode == Activity.RESULT_OK) {
-                int value = data.getIntExtra("values", 0);
-                rcvdstring = data.getStringExtra("totalcost");
-                price = data.getDoubleExtra("price", 0);
+                int value = data.getIntExtra(getString(R.string.values), 0);
+                rcvdstring = data.getStringExtra(getString(R.string.total));
+                price = data.getDoubleExtra(getString(R.string.price), 0);
                 itemcnt = value;
                 if (value != 0) {
                     ui_hot.setVisibility(View.VISIBLE);
-                    ui_hot.setText(Integer.toString(value));
+                    //   ui_hot.setText(Integer.toString(value));
+                    ui_hot.setText(String.format(Locale.ENGLISH, "%d", value));
                     ui_hot.setContentDescription(Integer.toString(value) + getString(R.string.itemselected));
                 }
             }
         }
         if (requestCode == 3) {
             if (resultCode == Activity.RESULT_OK) {
-                int value = data.getIntExtra("values", 0);
-                rcvdstring = data.getStringExtra("totalcost");
-                price = data.getDoubleExtra("price", 0);
-                Log.d(TAG, "the price is" + price);
+                int value = data.getIntExtra(getString(R.string.values), 0);
+                rcvdstring = data.getStringExtra(getString(R.string.total));
+                price = data.getDoubleExtra(getString(R.string.price), 0);
+                //  Log.d(TAG, "the price is" + price);
                 itemcnt = value;
                 if (value != 0) {
                     ui_hot.setVisibility(View.VISIBLE);
-                    ui_hot.setText(Integer.toString(value));
+                    // ui_hot.setText(Integer.toString(value));
+                    ui_hot.setText(String.format(Locale.ENGLISH, "%d", value));
                     ui_hot.setContentDescription(Integer.toString(value) + getString(R.string.itemselected));
                 }
             }

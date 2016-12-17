@@ -77,24 +77,23 @@ public class PaypalFragment extends Fragment {
         enablebutton(false);
         progressBar = (ProgressBar) view.findViewById(R.id.pbar);
         // textView= (TextView) findViewById(R.id.paytext);
-        price = getArguments().getDouble("price", 0);
+        price = getArguments().getDouble(getString(R.string.price), 0);
         prics = price + 1.0;
-        itemcnt = getArguments().getInt("values", 0);
-        //emails=getIntent().getStringExtra("emailaddr");
-        //  textView.setText(String.format("%s", vals));
+        itemcnt = getArguments().getInt(getString(R.string.values), 0);
+
 
         paynow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-                boolean islogin = sharedPreferences.getBoolean("isLogin", false);
+                boolean islogin = sharedPreferences.getBoolean(getString(R.string.islogin), false);
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-                prefs.edit().putBoolean("paypal", true).apply();
+                prefs.edit().putBoolean(getString(R.string.paypalsh), true).apply();
                 if (!islogin) {
                     Intent intent = new Intent(getContext(), SignIn.class);
                     SharedPreferences sharedPreferences1 = PreferenceManager.getDefaultSharedPreferences(getContext());
-                    sharedPreferences1.edit().putBoolean("paypal", true).apply();
-                    intent.putExtra("price", prics);
+                    sharedPreferences1.edit().putBoolean(getString(R.string.paypalsh), true).apply();
+                    intent.putExtra(getString(R.string.price), prics);
                     startActivity(intent);
                 } else {
 
@@ -149,10 +148,10 @@ public class PaypalFragment extends Fragment {
                 //if confirmation is not null
                 if (confirm != null) {
                     String state = confirm.getProofOfPayment().getState();
-                    if (state.equals("approved")) {
+                    if (state.equals(getString(R.string.approved))) {
                         enablebutton(false);
                         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-                        emails = sharedPreferences.getString("emailaddr", null);
+                        emails = sharedPreferences.getString(getString(R.string.emailaddr), null);
 
                         for (int i = 0; i < StartersListClass.starterclasses.size(); i++) {
                             titles.add(StartersListClass.starterclasses.get(i).getTitles());
@@ -163,11 +162,11 @@ public class PaypalFragment extends Fragment {
                         new EndpointsAsyncTask().execute();
 
                     } else {
-                        Toast.makeText(getContext(), "error in payment", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), R.string.errorpay, Toast.LENGTH_LONG).show();
                     }
 
                 } else {
-                    Toast.makeText(getContext(), "confirmation is null", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), R.string.confirmnull, Toast.LENGTH_LONG).show();
                 }
             } else if (resultCode == Activity.RESULT_CANCELED) {
                 Log.i("paymentExample", "The user canceled.");
@@ -194,7 +193,7 @@ public class PaypalFragment extends Fragment {
                         // - 10.0.2.2 is localhost's IP address in Android emulator
                         // - turn off compression when running against local devappserver
                         // .setRootUrl("http://10.0.2.2:8080/_ah/api/")
-                        .setRootUrl("https://capstoneproject1-150817.appspot.com/_ah/api/")
+                        .setRootUrl(getString(R.string.appspotpay))
                         .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
                             @Override
                             public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) throws IOException {
@@ -229,7 +228,7 @@ public class PaypalFragment extends Fragment {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             progressBar.setVisibility(View.GONE);
-            Toast.makeText(getContext(), "payment approved", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), R.string.payapprove, Toast.LENGTH_LONG).show();
             Intent intent = new Intent(getActivity(), Thanks.class);
             startActivity(intent);
         }

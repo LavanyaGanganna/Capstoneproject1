@@ -12,41 +12,44 @@
     tools:showIn="@layout/activity_starters">
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/starterslist"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen0"
         android:layout_weight="8.5"
-        android:orientation="vertical"
-        android:id="@+id/starterslist">
+        android:orientation="vertical">
+
     </android.support.v7.widget.RecyclerView>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen0"
         android:layout_gravity="bottom"
-        android:gravity="bottom"
         android:layout_weight="1.5"
         android:background="#FFDAB9"
+        android:gravity="bottom"
         android:orientation="horizontal">
 
-<TextView
-    android:layout_width="@dimen/dimen0"
-    android:layout_height="wrap_content"
-    android:layout_weight="1"
-    android:layout_marginLeft="@dimen/dimen8"
-    android:layout_marginStart="@dimen/dimen8"
-    android:textColor="@android:color/black"
-    android:textSize="@dimen/textsize24"
-    android:text="@string/items"
-    android:id="@+id/ordertext" />
-    <Button
-        android:layout_width="@dimen/dimen0"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.5"
-        android:layout_margin="@dimen/dimen8"
-        android:id="@+id/viewcart"
-        android:text="@string/viewcart"
-        android:textAllCaps="false"
-        android:textSize="@dimen/textsize20"
-        android:textColor="@android:color/white"
-        android:background="#502922"/>
+        <TextView
+            android:id="@+id/ordertext"
+            android:layout_width="@dimen/dimen0"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen8"
+            android:layout_marginStart="@dimen/dimen8"
+            android:layout_weight="1"
+            android:text="@string/items"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textsize24" />
+
+        <Button
+            android:id="@+id/viewcart"
+            android:layout_width="@dimen/dimen0"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen8"
+            android:layout_weight="0.5"
+            android:background="#502922"
+            android:text="@string/viewcart"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/textsize20" />
     </LinearLayout>
 </LinearLayout>

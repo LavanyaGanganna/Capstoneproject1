@@ -31,7 +31,7 @@ public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.ViewHold
     List<Starterclass> selectlist = new ArrayList<Starterclass>();
 
     public interface SummaryInterface {
-        public void showValues(int values, double price, String sending);
+        void showValues(int values, double price, String sending);
 
     }
 
@@ -62,8 +62,8 @@ public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.ViewHold
             public void onClick(View view) {
 
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(view.getContext());
-                alertDialogBuilder.setMessage("Remove item From List ");
-                alertDialogBuilder.setPositiveButton("Remove", new DialogInterface.OnClickListener() {
+                alertDialogBuilder.setMessage(R.string.removeitem);
+                alertDialogBuilder.setPositiveButton(R.string.remv, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
                         String tosend = "";
@@ -72,14 +72,14 @@ public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.ViewHold
                         notifyItemRangeChanged(holder.getAdapterPosition(), selectlist.size());
                         StartersListClass startersListClass = new StartersListClass();
                         if (startersListClass.getsize() > 1) {
-                            tosend = String.format(Locale.ENGLISH, "%d items | $ %.2f", startersListClass.getsize(), startersListClass.getprice());
+                            tosend = String.format(Locale.ENGLISH, "%d " + mcontext.getString(R.string.itemss) + "%.2f", startersListClass.getsize(), startersListClass.getprice());
                         } else {
-                            tosend = String.format(Locale.ENGLISH, "%d item | $ %.2f", startersListClass.getsize(), startersListClass.getprice());
+                            tosend = String.format(Locale.ENGLISH, "%d " + mcontext.getString(R.string.item) + "%.2f", startersListClass.getsize(), startersListClass.getprice());
                         }
                         summaryInterface.showValues(startersListClass.getsize(), startersListClass.getprice(), tosend);
                     }
                 });
-                alertDialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                alertDialogBuilder.setNegativeButton(R.string.cancl, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();

@@ -52,9 +52,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity"></activity>
         <activity
             android:name=".SignUp"
             android:configChanges="orientation|keyboardHidden"
@@ -197,8 +195,10 @@
             android:theme="@android:style/Theme.Translucent" />
         <activity
             android:name=".Vegetarian"
+            android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_vegetarian"
             android:parentActivityName=".OurMenu"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -206,8 +206,10 @@
         </activity>
         <activity
             android:name=".FishDishes"
+            android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_fish_dishes"
             android:parentActivityName=".OurMenu"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -215,8 +217,10 @@
         </activity>
         <activity
             android:name=".BirdsNest"
+            android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_birds_nest"
             android:parentActivityName=".OurMenu"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -225,20 +229,29 @@
 
         <receiver
             android:name=".RedWidgetProvider"
+            android:enabled="@bool/widget_detail_enabled"
             android:label="@string/redchillies">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.example.android.sunshine.app.ACTION_DATA_UPDATED" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_smallinfo" />
         </receiver>
+        <service
+            android:name=".RedWidgetRemoteViewsService"
+            android:enabled="@bool/widget_detail_enabled"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
 
         <activity
             android:name=".MeatDishes"
+            android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_meat_dishes"
             android:parentActivityName=".OurMenu"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -246,8 +259,10 @@
         </activity>
         <activity
             android:name=".Biryani"
+            android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_biryani"
             android:parentActivityName=".OurMenu"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -255,8 +270,10 @@
         </activity>
         <activity
             android:name=".BreadsDishes"
+            android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_breads_dishes"
             android:parentActivityName=".OurMenu"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -264,8 +281,10 @@
         </activity>
         <activity
             android:name=".DessertsDishes"
+            android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_desserts_dishes"
             android:parentActivityName=".OurMenu"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -273,8 +292,10 @@
         </activity>
         <activity
             android:name=".BeveragesDishes"
+            android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_beverages_dishes"
             android:parentActivityName=".OurMenu"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -282,13 +303,16 @@
         </activity>
         <activity
             android:name=".WrapDishes"
+            android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_wrap_dishes"
             android:parentActivityName=".OurMenu"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.capstoneproject1.OurMenu" />
         </activity>
+
     </application>
 
 </manifest>

@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@android:color/white"
-    android:layout_height="match_parent">
+    android:orientation="vertical">
 
     <Button
+        android:id="@+id/paynow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/paynow"
-        android:text="Pay Now"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/dimen20"
-        android:background="#FF4500"/>
+        android:background="#FF4500"
+        android:text="@string/pay_now" />
 
     <ProgressBar
+        android:id="@+id/pbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:id="@+id/pbar"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </LinearLayout>

@@ -3,19 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/content_soups"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:weightSum="10"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.android.capstoneproject1.SoupsActivity"
     tools:showIn="@layout/activity_soups">
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclesoup"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen0"
-        android:layout_weight="8.5"
-        android:id="@+id/recyclesoup">
+        android:layout_weight="8.5">
 
     </android.support.v7.widget.RecyclerView>
 
@@ -27,25 +27,26 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/ordertext"
             android:layout_width="@dimen/dimen0"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginLeft="@dimen/dimen8"
             android:layout_marginStart="@dimen/dimen8"
-            android:textSize="@dimen/textsize24"
-            android:textColor="@android:color/black"
+            android:layout_weight="1"
             android:text="@string/items"
-            android:id="@+id/ordertext" />
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textsize24" />
+
         <Button
-            android:layout_width="@dimen/dimen0"
-            android:layout_margin="@dimen/dimen8"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
             android:id="@+id/viewcart"
-            android:textSize="@dimen/textsize20"
-            android:textAllCaps="false"
+            android:layout_width="@dimen/dimen0"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen8"
+            android:layout_weight="0.5"
+            android:background="#502922"
             android:text="@string/view_cart"
+            android:textAllCaps="false"
             android:textColor="@android:color/white"
-            android:background="#502922"/>
+            android:textSize="@dimen/textsize20" />
     </LinearLayout>
 </LinearLayout>

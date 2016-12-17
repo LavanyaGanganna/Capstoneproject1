@@ -1,13 +1,8 @@
 <resources xmlns:xliff="http://schemas.android.com/tools">
     <string name="app_name">Capstoneproject1</string>
-    <string name="enter_location">Enter Location</string>
-    <string name="find_restaurants">FIND RESTAURANTS</string>
-    <string name="start_your_order">START YOUR ORDER</string>
-    <string name="red_chillies_kerala_food">Red chillies Kerala Food</string>
-    <string name="open_drawer" translatable="false">Open menu drawer</string>
-    <string name="close_drawer" translatable="false">Close menu drawer</string>
+
     <string name="red_chillies">Red chillies</string>
-    <string name="puttu_or_rice_cake">puttu or rice cake</string>
+
     <string name="home_button" translatable="false">Home button</string>
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
@@ -15,72 +10,37 @@
     <string name="fulladdress">Red Chillies-South Indian, \n Malabar Cuisine, \n 167 south main street, \n Milpitas, CA 95035 \n </string>
 
     <string name="telno" translatable="false">Tel: 5106468490 </string>
-    <string name="addresstr">Red Chillies-Milpitas, CA 95035</string>
-    <string name="cutlet">Vegetable Cutlet (2 pcs) \n 
-(A veggie delight; Cutlet made with mix vegetables)</string>
-    <string name="mushroom">Mushroom Pepper Fry \n
-(Dices of mushroom tossed with crushed black pepper)</string>
-    <string name="gobi">Gobi Manchurian \n
-(Fried cauliflower with Manchurian sauce and spices)</string>
-    <string name="chillgobi">Chilli Gobi \n
-(Fried cauliflower sautéed with onion, bell pepper and chilli sauce)</string>
-    <string name="vegpakora">Vegetable Pakora \n
-(Fresh vegetables marinated in spicy batter and deep fried)</string>
+
     <string name="babycorn">Baby Corn Manchurian \n
 (Fried baby corn with Manchurian sauce and spices))</string>
-    <string name="chillpaneer">Chilli Panner \n
-(Fried paneer sautéed with onion, bell pepper and chilli sauce)</string>
-    <string name="fcutlet">Fish cutlet (2 pcs)</string>
-    <string name="nfry">Natholi Fry \n
-(Crispy Anchovy fry- A Red Chillies Specialty)</string>
-    <string name="fpakora">Fish Pakora \n
-(Fish marinated in spicy batter and deep fried)</string>
-    <string name="grillshrimp">Malabar Grilled Shrimps \n
-(Large shrimps grilled with Malabar spices)</string>
-    <string name="chemeen">Chemmeen Chilli Fry \n
-(Fried shrimps tossed with green chilli)</string>
+
     <string name="fchicken">Travancore Fried Chicken \n
 (A local delicacy from Central Travancore)</string>
-    <string name="chillchicken">Chilli Chicken \n
-(Fried boneless chicken sautéed with onion, bell pepper and chilli)</string>
-    <string name="chick">Chicken 65 \n
-        (Fried boneless chicken cubes tossed with ginger, garlic and green chilli)</string>
-    <string name="tikka">Chicken Tikka \n
-        (Marinated tender boneless chicken cubes baked in Tandoor oven)</string>
+
     <string name="beef">Beef Cutlet – 2 pcs \n
         (A meat delight; Cutlet made with beef)</string>
-    <string-array name="listoptions">
-        <item>Home</item>
-        <item>Signup</item>
-        <item>Photos</item>
-        <item>Menu</item>
-        <item>Order</item>
-        <item>location</item>
-    </string-array>
     <string name="title_activity_sign_up">SignUp</string>
-    <string name="title_activity_thank">Thank</string>
     <string name="title_activity_thanks">Thanks</string>
     <string name="title_activity_sign_in">SignIn</string>
     <string name="title_activity_our_menu">OurMenu</string>
     <string name="title_activity_locate">LocateActivity</string>
     <string name="title_activity_starters">StartersActivity</string>
     <string name="order">+Order</string>
-    <string name="title_activity_items_summary">ItemsSummary</string>
+   <string name="orders">Order</string>
     <string name="shoppinglist">shoppinglist</string>
-    <string name="searching">searching</string>
+
     <string name="title_activity_view_summary">ViewSummary</string>
     <string name="remove">Remove</string>
     <string name="title_activity_checkout">Checkout</string>
     <string name="payment_method">Select Payment Method</string>
-    <string name="title_activity_paypal_integration">PaypalIntegration</string>
-    <string name="title_activity_mail_sender">MailSender</string>
+
     <string name="united_states">United States</string>
     <string name="country">Country</string>
     <string name="title_activity_admindisplay">Admindisplay</string>
-    <string name="orders_table">Orders Table</string>
+
     <string name="email_address">email address</string>
     <string name="delivered">Delivered</string>
-    <string name="title_activity_android_pay">AndroidPay</string>
+
     <string name="title_activity_contact">Contact</string>
     <string name="call_now">Call Now</string>
     <string name="title_activity_soups">SoupsActivity</string>
@@ -132,13 +92,126 @@
     <string name="itemremoved">item removed</string>
     <string name="itemadded">item added</string>
     <string name="google_sign_in">google sign in</string>
-    <string name="enter_email_address">enter email address</string>
-    <string name="enter_password">enter password</string>
-    <string name="enter_email">enter email</string>
-    <string name="reenter_password">reenter password</string>
-    <string name="enter_mobile_number">enter mobile number</string>
-    <string name="already_a_member_login">Already a member? Login</string>
-    <string name="home">home</string>
 
+    <string name="already_a_member_login">Already a member? Login</string>
+
+    <string name="thanks_for_ordering">Thanks for ordering</string>
+    <string name="fishfries">fishfries</string>
+    <string name="starters">starters</string>
+    <string name="redchils">red chillies,malbar cuisine</string>
+    <string name="pay_now">Pay Now</string>
+    <string name="shopping_list">shopping list</string>
+    <string name="personalttf">font/DarkLarch_PERSONAL_USE.ttf</string>
+    <string name="admindisplay">Admin Display</string>
+    <string name="appspot">https://capstoneproject1-150817.appspot.com/_ah/api/</string>
+    <string name="totalcost">TotalCost:</string>
+    <string name="values">values</string>
+    <string name="price">price</string>
+    <string name="total">totalcost</string>
+    <string name="beverage">Beverage</string>
+    <string name="backpress">backpress</string>
+    <string name="chicken">Chicken</string>
+    <string name="biryani">Biryani</string>
+    <string name="breads">Breads</string>
+    <string name="paylogin">paylogin</string>
+    <string name="textplain">text/plain</string>
+    <string name="onedollar">$1.00</string>
+    <string name="totalprice">"Total price: "</string>
+    <string name="sharevia">share via</string>
+    <string name="paypal">PayPal</string>
+    <string name="paymentmethod">Select Payment Method</string>
+    <string name="paypalsh">paypal</string>
+    <string name="spinner">spinner</string>
+    <string name="teleno">tel:5106468490</string>
+    <string name="contactus">Contact Us</string>
+    <string name="dessert">Dessert</string>
+    <string name="fish">Fish</string>
+    <string name="bakingappam">Baking Appam</string>
+    <string name="locations">Location</string>
+    <string name="ourmenus">Our Menu</string>
+    <string name="contacts">Contact</string>
+    <string name="summary">summary</string>
+    <string name="location">Location</string>
+    <string name="reds">Red Chillies</string>
+    <string name="admin">admin@redchillies.com</string>
+    <string name="passman">mannam</string>
+    <string name="redc">Red Chillies</string>
+    <string name="appspots">https://capstoneproject1-150817.appspot.com/_ah/api/</string>
+    <string name="keralfryfish">kerala fried fish</string>
+    <string name="fryrice">fried rice</string>
+    <string name="steamputtu">kerala steamed puttu</string>
+    <string name="dilkush">dil kush sweet</string>
+    <string name="meats">Meat</string>
+    <string name="orderappspot">https://capstoneproject1-150817.appspot.com/_ah/api/</string>
+    <string name="testdeviceno">4867513FE210DD1D74E0FF3EA301E4C0</string>
+    <string name="starterss">Starters</string>
+    <string name="soupss">Soups And Salads</string>
+    <string name="vegies">Vegetarian Specialties</string>
+    <string name="fishdish">Fish Dishes</string>
+    <string name="birdsnest">Birds Nest</string>
+    <string name="meatspecial">Meat Specialties</string>
+    <string name="biryanicor">Biryani Corner</string>
+    <string name="wraphous">Wrap House</string>
+    <string name="breadssides"><![CDATA[Breads & Sides]]></string>
+    <string name="desert">Desserts</string>
+    <string name="beveragess">Beverages</string>
+    <string name="menuss">Menu</string>
+    <string name="islogin">isLogin</string>
+    <string name="approved">approved</string>
+    <string name="emailaddr">emailaddr</string>
+    <string name="appspotpay">https://capstoneproject1-150817.appspot.com/_ah/api/</string>
+    <string name="payapprove">payment approved</string>
+    <string name="errorpay">error in payment</string>
+    <string name="confirmnull">confirmation is null</string>
+    <string name="signins">Sign In</string>
+    <string name="unablegoogle">Unable to use Google Signin</string>
+    <string name="loginsuce">Login success</string>
+    <string name="adminss">admin@redchillies.com</string>
+    <string name="mannamspass">mannam</string>
+    <string name="validemail">enter a valid email address</string>
+    <string name="enterfour">enter between 4 to 10 characters</string>
+    <string name="wrongpassword">wrong password or username</string>
+    <string name="errorrr">Error Message...</string>
+    <string name="oks">OK</string>
+    <string name="okk">Ok</string>
+    <string name="appspotsign">https://capstoneproject1-150817.appspot.com/_ah/api/</string>
+    <string name="notmember">Not a member please SignUp</string>
+    <string name="appspotsignins">https://capstoneproject1-150817.appspot.com/_ah/api/</string>
+    <string name="acntcreat">Account created</string>
+    <string name="loginsuc">Login success</string>
+    <string name="signups">Sign Up</string>
+    <string name="creatingaccnt">Creating Account...</string>
+    <string name="loginfailed">Login failed Check Credentials</string>
+    <string name="entervalid">enter a valid email address</string>
+    <string name="betweenfour">between 4 and 10 alphanumeric characters</string>
+    <string name="passwordsdont">passwords dont match</string>
+    <string name="notvalid">not valid email</string>
+    <string name="notvalidpass">not valid passwd</string>
+    <string name="notvalidnum">not valid mobile number</string>
+    <string name="passdont">password dont match</string>
+    <string name="a_z">^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@</string>
+    <string name="a_zz">[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$</string>
+    <string name="appspotsignup">https://capstoneproject1-150817.appspot.com/_ah/api/</string>
+    <string name="accntcreat">Account created</string>
+    <string name="useralready">User already exists, Please login</string>
+    <string name="soupe">Soups</string>
+    <string name="start">Starters</string>
+    <string name="wrap">Wraps</string>
+    <string name="summs">Summary</string>
+    <string name="texts">text/plain</string>
+    <string name="shares">share via</string>
+    <string name="sharenull">share action provider is null</string>
+    <string name="vegs">Veggies</string>
+    <string name="thank">Thanks</string>
+    <string name="removeitem">"Remove item From List "</string>
+    <string name="remv">Remove</string>
+    <string name="cancl">Cancel</string>
+    <string name="txt">text/plain</string>
+    <string name="itemaddeds">item added to cart</string>
+ <string name="shareaction">share action provider is null</string>
+ <string name="gpsnot">GPS is not enabled</string>
+<string name="item">item | $ </string>
+ <string name="itemss">items | $ </string>
+ <string name="dollr">$</string>
 
 </resources>

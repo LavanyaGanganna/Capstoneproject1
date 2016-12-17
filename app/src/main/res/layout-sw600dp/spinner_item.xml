@@ -3,5 +3,6 @@
     android:layout_height="wrap_content"
     style="?android:attr/spinnerItemStyle"
     android:singleLine="true"
+    android:maxLines="1"
     android:ellipsize="marquee"
     android:textSize="@dimen/textsize29"/>

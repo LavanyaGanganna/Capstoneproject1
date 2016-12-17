@@ -29,6 +29,8 @@ import static android.content.ContentValues.TAG;
  */
 
 public class StartersAdapter extends RecyclerView.Adapter<StartersAdapter.ViewHolder> {
+    public static final String ACTION_DATA_UPDATED =
+            "com.example.android.capstoneproject1.ACTION_DATA_UPDATED";
     ArrayList<Starterclass> arrayList;
     public static final String FOOD_SHARE_HASHTAG = " #Redchillies";
     int total = 0;
@@ -38,7 +40,7 @@ public class StartersAdapter extends RecyclerView.Adapter<StartersAdapter.ViewHo
     static Intent shareintent;
 
     public interface DataTransferInterface {
-        public void setValues(int values, double price, String sending);
+        void setValues(int values, double price, String sending);
 
     }
 
@@ -71,9 +73,9 @@ public class StartersAdapter extends RecyclerView.Adapter<StartersAdapter.ViewHo
                 public void onClick(View view) {
                     shareintent = new Intent(android.content.Intent.ACTION_SEND);
                     String sharebody = arrayList.get(getAdapterPosition()).getTitles() + FOOD_SHARE_HASHTAG;
-                    shareintent.setType("text/plain");
+                    shareintent.setType(mcontext.getString(R.string.txt));
                     shareintent.putExtra(Intent.EXTRA_TEXT, sharebody);
-                    mcontext.startActivity(Intent.createChooser(shareintent, "share via"));
+                    mcontext.startActivity(Intent.createChooser(shareintent, mcontext.getString(R.string.shares)));
                 }
             });
         }
@@ -103,11 +105,12 @@ public class StartersAdapter extends RecyclerView.Adapter<StartersAdapter.ViewHo
                 String tosend = "";
                 StartersListClass startersListClass = new StartersListClass();
                 StartersListClass.starterclasses.add(arrayList.get(holder.getAdapterPosition()));
-                Toast.makeText(mcontext, "item added to cart", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mcontext, R.string.itemaddeds, Toast.LENGTH_SHORT).show();
+                updatewidget();
                 if (startersListClass.getsize() > 1) {
-                    tosend = String.format(Locale.ENGLISH, "%d items | $ %.2f", startersListClass.getsize(), startersListClass.getprice());
+                    tosend = String.format(Locale.ENGLISH, "%d " + mcontext.getString(R.string.itemss) + "%.2f", startersListClass.getsize(), startersListClass.getprice());
                 } else {
-                    tosend = String.format(Locale.ENGLISH, "%d item | $ %.2f", startersListClass.getsize(), startersListClass.getprice());
+                    tosend = String.format(Locale.ENGLISH, "%d " + mcontext.getString(R.string.item) + "%.2f", startersListClass.getsize(), startersListClass.getprice());
                 }
                 dataTransferInterface.setValues(startersListClass.getsize(), startersListClass.getprice(), tosend);
 
@@ -122,5 +125,11 @@ public class StartersAdapter extends RecyclerView.Adapter<StartersAdapter.ViewHo
         return arrayList.size();
     }
 
-
+    public void updatewidget() {
+        Context context = mcontext;
+        // Setting the package ensures that only components in our app will receive the broadcast
+        Intent dataUpdatedIntent = new Intent(ACTION_DATA_UPDATED)
+                .setPackage(context.getPackageName());
+        context.sendBroadcast(dataUpdatedIntent);
+    }
 }

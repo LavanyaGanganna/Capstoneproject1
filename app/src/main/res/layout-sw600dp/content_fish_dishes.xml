@@ -43,7 +43,7 @@
             android:id="@+id/viewcart"
             android:text="@string/viewcart"
             android:textAllCaps="false"
-            android:textSize="@dimen/dimen30"
+            android:textSize="@dimen/textsize30"
             android:textColor="@android:color/white"
             android:background="#502922"/>
     </LinearLayout>

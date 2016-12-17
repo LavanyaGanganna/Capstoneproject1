@@ -1,14 +1,20 @@
 package com.example.android.capstoneproject1;
 
+import android.content.CursorLoader;
 import android.content.Intent;
+import android.content.Loader;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.app.LoaderManager;
+
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -27,11 +33,15 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
 import java.util.ArrayList;
+import java.util.Locale;
+
+import data.MenuTableContract;
 
 import static android.content.ContentValues.TAG;
 
-public class OurMenu extends AppCompatActivity {
+public class OurMenu extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     private static final String TAG = OurMenu.class.getSimpleName();
+    private static final int DETAIL_LOADER = 0;
     ListView listView;
     ArrayList<MenuList> Menus = new ArrayList<MenuList>();
     TextView ui_hot;
@@ -39,38 +49,50 @@ public class OurMenu extends AppCompatActivity {
     String rcvdstring;
     double price;
     AdView mAdView;
+    private static final int STARTERS_REQUEST_CODE = 1;
+    private static final int SOUPS_REQUEST_CODE = 2;
+    private static final int VEGGIES_REQUEST_CODE = 3;
+    private static final int FISH_REQUEST_CODE = 4;
+    private static final int BIRDS_REQUEST_CODE = 5;
+    private static final int MEAT_REQUEST_CODE = 6;
+    private static final int BIRYANI_REQUEST_CODE = 7;
+    private static final int WRAP_REQUEST_CODE = 8;
+    private static final int BREAD_REQUEST_CODE = 9;
+    private static final int DESSERT_REQUEST_CODE = 10;
+    private static final int BEVERAGE_REQUEST_CODE = 11;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_our_menu);
+
         setProgressBarIndeterminateVisibility(false);
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 mAdView = (AdView) findViewById(R.id.adView);
                 AdRequest adRequest = new AdRequest.Builder()
-                        .addTestDevice("4867513FE210DD1D74E0FF3EA301E4C0")
+                        .addTestDevice(getString(R.string.testdeviceno))
                         .build();
                 mAdView.loadAd(adRequest);
             }
         });
 
-        itemcnt = getIntent().getIntExtra("values", 0);
-        price = getIntent().getDoubleExtra("price", 0);
-        rcvdstring = getIntent().getStringExtra("totalcost");
+        itemcnt = getIntent().getIntExtra(getString(R.string.values), 0);
+        price = getIntent().getDoubleExtra(getString(R.string.price), 0);
+        rcvdstring = getIntent().getStringExtra(getString(R.string.total));
         listView = (ListView) findViewById(R.id.menulist);
-        Menus.add(new MenuList(R.drawable.starter, "Starters"));
-        Menus.add(new MenuList(R.drawable.soupsalad, "Soups And Salads"));
-        Menus.add(new MenuList(R.drawable.veggi, "Vegetarian Specialties"));
-        Menus.add(new MenuList(R.drawable.fishes, "Fish Dishes"));
-        Menus.add(new MenuList(R.drawable.chickenleg, "Birds Nest"));
-        Menus.add(new MenuList(R.drawable.meatloaf, "Meat Specialties"));
-        Menus.add(new MenuList(R.drawable.biryanis, "Biryani Corner"));
-        Menus.add(new MenuList(R.drawable.wrapss, "Wrap House"));
-        Menus.add(new MenuList(R.drawable.wheatss, "Breads & Sides"));
-        Menus.add(new MenuList(R.drawable.icecream, "Desserts"));
-        Menus.add(new MenuList(R.drawable.drin, "Beverages"));
+        Menus.add(new MenuList(R.drawable.starter, getString(R.string.starterss)));
+        Menus.add(new MenuList(R.drawable.soupsalad, getString(R.string.soupss)));
+        Menus.add(new MenuList(R.drawable.veggi, getString(R.string.vegies)));
+        Menus.add(new MenuList(R.drawable.fishes, getString(R.string.fishdish)));
+        Menus.add(new MenuList(R.drawable.chickenleg, getString(R.string.birdsnest)));
+        Menus.add(new MenuList(R.drawable.meatloaf, getString(R.string.meatspecial)));
+        Menus.add(new MenuList(R.drawable.biryanis, getString(R.string.biryanicor)));
+        Menus.add(new MenuList(R.drawable.wrapss, getString(R.string.wraphous)));
+        Menus.add(new MenuList(R.drawable.wheatss, getString(R.string.breadssides)));
+        Menus.add(new MenuList(R.drawable.icecream, getString(R.string.desert)));
+        Menus.add(new MenuList(R.drawable.drin, getString(R.string.beveragess)));
         MenuArray menuArray = new MenuArray(getApplicationContext(), Menus);
         listView.setAdapter(menuArray);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -78,95 +100,95 @@ public class OurMenu extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i == 0) {
                     Intent intent = new Intent(OurMenu.this, StartersActivity.class);
-                    intent.putExtra("values", itemcnt);
-                    intent.putExtra("price", price);
-                    Log.d(TAG, "going price" + price);
-                    intent.putExtra("totalcost", rcvdstring);
-                    startActivityForResult(intent, 1);
+                    intent.putExtra(getString(R.string.values), itemcnt);
+                    intent.putExtra(getString(R.string.price), price);
+                    //  Log.d(TAG, "going price" + price);
+                    intent.putExtra(getString(R.string.total), rcvdstring);
+                    startActivityForResult(intent, STARTERS_REQUEST_CODE);
                 }
                 if (i == 1) {
                     Intent intent = new Intent(OurMenu.this, SoupsActivity.class);
-                    intent.putExtra("values", itemcnt);
-                    intent.putExtra("price", price);
-                    Log.d(TAG, "going price" + price);
-                    intent.putExtra("totalcost", rcvdstring);
-                    startActivityForResult(intent, 2);
+                    intent.putExtra(getString(R.string.values), itemcnt);
+                    intent.putExtra(getString(R.string.price), price);
+                    //  Log.d(TAG, "going price" + price);
+                    intent.putExtra(getString(R.string.total), rcvdstring);
+                    startActivityForResult(intent, SOUPS_REQUEST_CODE);
                 }
                 if (i == 2) {
                     Intent intent = new Intent(OurMenu.this, Vegetarian.class);
-                    intent.putExtra("values", itemcnt);
-                    intent.putExtra("price", price);
-                    Log.d(TAG, "going price" + price);
-                    intent.putExtra("totalcost", rcvdstring);
-                    startActivityForResult(intent, 3);
+                    intent.putExtra(getString(R.string.values), itemcnt);
+                    intent.putExtra(getString(R.string.price), price);
+                    //   Log.d(TAG, "going price" + price);
+                    intent.putExtra(getString(R.string.total), rcvdstring);
+                    startActivityForResult(intent, VEGGIES_REQUEST_CODE);
                 }
                 if (i == 3) {
                     Intent intent = new Intent(OurMenu.this, FishDishes.class);
-                    intent.putExtra("values", itemcnt);
-                    intent.putExtra("price", price);
-                    Log.d(TAG, "going price" + price);
-                    intent.putExtra("totalcost", rcvdstring);
-                    startActivityForResult(intent, 4);
+                    intent.putExtra(getString(R.string.values), itemcnt);
+                    intent.putExtra(getString(R.string.price), price);
+                    // Log.d(TAG, "going price" + price);
+                    intent.putExtra(getString(R.string.total), rcvdstring);
+                    startActivityForResult(intent, FISH_REQUEST_CODE);
                 }
                 if (i == 4) {
                     Intent intent = new Intent(OurMenu.this, BirdsNest.class);
-                    intent.putExtra("values", itemcnt);
-                    intent.putExtra("price", price);
-                    Log.d(TAG, "going price" + price);
-                    intent.putExtra("totalcost", rcvdstring);
-                    startActivityForResult(intent, 5);
+                    intent.putExtra(getString(R.string.values), itemcnt);
+                    intent.putExtra(getString(R.string.price), price);
+                    //   Log.d(TAG, "going price" + price);
+                    intent.putExtra(getString(R.string.total), rcvdstring);
+                    startActivityForResult(intent, BIRDS_REQUEST_CODE);
                 }
 
                 if (i == 5) {
                     Intent intent = new Intent(OurMenu.this, MeatDishes.class);
-                    intent.putExtra("values", itemcnt);
-                    intent.putExtra("price", price);
-                    Log.d(TAG, "going price" + price);
-                    intent.putExtra("totalcost", rcvdstring);
-                    startActivityForResult(intent, 6);
+                    intent.putExtra(getString(R.string.values), itemcnt);
+                    intent.putExtra(getString(R.string.price), price);
+                    //  Log.d(TAG, "going price" + price);
+                    intent.putExtra(getString(R.string.total), rcvdstring);
+                    startActivityForResult(intent, MEAT_REQUEST_CODE);
                 }
                 if (i == 6) {
                     Intent intent = new Intent(OurMenu.this, Biryani.class);
-                    intent.putExtra("values", itemcnt);
-                    intent.putExtra("price", price);
-                    Log.d(TAG, "going price" + price);
-                    intent.putExtra("totalcost", rcvdstring);
-                    startActivityForResult(intent, 7);
+                    intent.putExtra(getString(R.string.values), itemcnt);
+                    intent.putExtra(getString(R.string.price), price);
+                    // Log.d(TAG, "going price" + price);
+                    intent.putExtra(getString(R.string.total), rcvdstring);
+                    startActivityForResult(intent, BIRYANI_REQUEST_CODE);
                 }
 
                 if (i == 7) {
                     Intent intent = new Intent(OurMenu.this, WrapDishes.class);
-                    intent.putExtra("values", itemcnt);
-                    intent.putExtra("price", price);
-                    Log.d(TAG, "going price" + price);
-                    intent.putExtra("totalcost", rcvdstring);
-                    startActivityForResult(intent, 8);
+                    intent.putExtra(getString(R.string.values), itemcnt);
+                    intent.putExtra(getString(R.string.price), price);
+                    //   Log.d(TAG, "going price" + price);
+                    intent.putExtra(getString(R.string.total), rcvdstring);
+                    startActivityForResult(intent, WRAP_REQUEST_CODE);
                 }
 
                 if (i == 8) {
                     Intent intent = new Intent(OurMenu.this, BreadsDishes.class);
-                    intent.putExtra("values", itemcnt);
-                    intent.putExtra("price", price);
-                    Log.d(TAG, "going price" + price);
-                    intent.putExtra("totalcost", rcvdstring);
-                    startActivityForResult(intent, 9);
+                    intent.putExtra(getString(R.string.values), itemcnt);
+                    intent.putExtra(getString(R.string.price), price);
+                    //   Log.d(TAG, "going price" + price);
+                    intent.putExtra(getString(R.string.total), rcvdstring);
+                    startActivityForResult(intent, BREAD_REQUEST_CODE);
                 }
                 if (i == 9) {
                     Intent intent = new Intent(OurMenu.this, DessertsDishes.class);
-                    intent.putExtra("values", itemcnt);
-                    intent.putExtra("price", price);
-                    Log.d(TAG, "going price" + price);
-                    intent.putExtra("totalcost", rcvdstring);
-                    startActivityForResult(intent, 10);
+                    intent.putExtra(getString(R.string.values), itemcnt);
+                    intent.putExtra(getString(R.string.price), price);
+                    //  Log.d(TAG, "going price" + price);
+                    intent.putExtra(getString(R.string.total), rcvdstring);
+                    startActivityForResult(intent, DESSERT_REQUEST_CODE);
                 }
 
                 if (i == 10) {
                     Intent intent = new Intent(OurMenu.this, BeveragesDishes.class);
-                    intent.putExtra("values", itemcnt);
-                    intent.putExtra("price", price);
-                    Log.d(TAG, "going price" + price);
-                    intent.putExtra("totalcost", rcvdstring);
-                    startActivityForResult(intent, 11);
+                    intent.putExtra(getString(R.string.values), itemcnt);
+                    intent.putExtra(getString(R.string.price), price);
+                    //  Log.d(TAG, "going price" + price);
+                    intent.putExtra(getString(R.string.total), rcvdstring);
+                    startActivityForResult(intent, BEVERAGE_REQUEST_CODE);
                 }
 
             }
@@ -174,11 +196,11 @@ public class OurMenu extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        Typeface darllarch = Typeface.createFromAsset(getAssets(), "font/DarkLarch_PERSONAL_USE.ttf");
+        Typeface darllarch = Typeface.createFromAsset(getAssets(), getString(R.string.personalttf));
         TextView mytitle = (TextView) toolbar.getChildAt(0);
         mytitle.setTypeface(darllarch);
         mytitle.setTextSize(30);
-        getSupportActionBar().setTitle("Menu");
+        getSupportActionBar().setTitle(R.string.menuss);
         boolean tabletsize = getResources().getBoolean(R.bool.isTablet);
         if (tabletsize) {
             mytitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 45);
@@ -186,20 +208,28 @@ public class OurMenu extends AppCompatActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        getLoaderManager().initLoader(DETAIL_LOADER, null, this);
+    }
+
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 || requestCode == 2 || requestCode == 3 || requestCode == 4 || requestCode == 5
-                || requestCode == 6 || requestCode == 7 || requestCode == 8 || requestCode == 9 ||
-                requestCode == 10 || requestCode == 11) {
+        if (requestCode == STARTERS_REQUEST_CODE || requestCode == SOUPS_REQUEST_CODE || requestCode == VEGGIES_REQUEST_CODE || requestCode == FISH_REQUEST_CODE || requestCode == BIRDS_REQUEST_CODE
+                || requestCode == MEAT_REQUEST_CODE || requestCode == BIRYANI_REQUEST_CODE || requestCode == WRAP_REQUEST_CODE || requestCode == BREAD_REQUEST_CODE ||
+                requestCode == DESSERT_REQUEST_CODE || requestCode == BEVERAGE_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                int value = data.getIntExtra("values", 0);
-                rcvdstring = data.getStringExtra("totalcost");
-                price = data.getDoubleExtra("price", 0);
-                Log.d(TAG, "the price is" + price);
+                int value = data.getIntExtra(getString(R.string.values), 0);
+                rcvdstring = data.getStringExtra(getString(R.string.total));
+                price = data.getDoubleExtra(getString(R.string.price), 0);
+                //   Log.d(TAG, "the price is" + price);
                 itemcnt = value;
                 if (value != 0) {
                     ui_hot.setVisibility(View.VISIBLE);
-                    ui_hot.setText(Integer.toString(value));
+                    // ui_hot.setText(Integer.toString(value));
+                    ui_hot.setText(String.format(Locale.ENGLISH, "%d", value));
                     ui_hot.setContentDescription(Integer.toString(value) + getString(R.string.itemselected));
                 }
             }
@@ -217,15 +247,16 @@ public class OurMenu extends AppCompatActivity {
         int sizes = StartersListClass.starterclasses.size();
         if (sizes != 0) {
             ui_hot.setVisibility(View.VISIBLE);
-            ui_hot.setText(Integer.toString(sizes));
+            // ui_hot.setText(Integer.toString(sizes));
+            ui_hot.setText(String.format(Locale.ENGLISH, "%d", sizes));
             ui_hot.setContentDescription(Integer.toString(sizes) + getString(R.string.itemselected));
         }
         menulayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(OurMenu.this, ViewSummary.class);
-                intent.putExtra("price", price);
-                intent.putExtra("totalcost", rcvdstring);
+                intent.putExtra(getString(R.string.price), price);
+                intent.putExtra(getString(R.string.total), rcvdstring);
                 startActivity(intent);
             }
         });
@@ -240,11 +271,11 @@ public class OurMenu extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent returnIntent = new Intent();
-        returnIntent.putExtra("values", itemcnt);
-        returnIntent.putExtra("price", price);
-        returnIntent.putExtra("totalcost", rcvdstring);
+        returnIntent.putExtra(getString(R.string.values), itemcnt);
+        returnIntent.putExtra(getString(R.string.price), price);
+        returnIntent.putExtra(getString(R.string.total), rcvdstring);
         SharedPreferences Preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        Preferences.edit().putBoolean("backpress", true).apply();
+        Preferences.edit().putBoolean(getString(R.string.backpress), true).apply();
         setResult(RESULT_OK, returnIntent);
         finish();
         super.onBackPressed();
@@ -255,11 +286,11 @@ public class OurMenu extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 Intent returnIntent = new Intent();
-                returnIntent.putExtra("values", itemcnt);
-                returnIntent.putExtra("price", price);
-                returnIntent.putExtra("totalcost", rcvdstring);
+                returnIntent.putExtra(getString(R.string.values), itemcnt);
+                returnIntent.putExtra(getString(R.string.price), price);
+                returnIntent.putExtra(getString(R.string.total), rcvdstring);
                 SharedPreferences Preferences = PreferenceManager.getDefaultSharedPreferences(this);
-                Preferences.edit().putBoolean("backpress", true).apply();
+                Preferences.edit().putBoolean(getString(R.string.backpress), true).apply();
                 setResult(RESULT_OK, returnIntent);
                 finish();
                 break;
@@ -298,5 +329,292 @@ public class OurMenu extends AppCompatActivity {
         MenuItem menushare = menu.findItem(R.id.Shareaction);
         menushare.setVisible(false);
         return super.onPrepareOptionsMenu(menu);
+    }
+
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+
+        return new CursorLoader(getApplicationContext(), MenuTableContract.MenuEntry.CONTENT_URI, null, null, null, null);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+
+        int imageno;
+        String titletext;
+        String pricetext;
+        int images;
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                imageno = cursor.getInt(cursor.getColumnIndexOrThrow(MenuTableContract.MenuEntry.COLUMN_FIRST_VAL));
+                titletext = cursor.getString(cursor.getColumnIndexOrThrow(MenuTableContract.MenuEntry.COLUMN_FOOD_TITLE));
+                pricetext = cursor.getString(cursor.getColumnIndexOrThrow(MenuTableContract.MenuEntry.COLUMN_FOOD_PRICE));
+                images = getimage(imageno);
+                Starterclass starterclass = new Starterclass(images, titletext, pricetext);
+                DatabaseList.fullmenulist.add(starterclass);
+
+            } while (cursor.moveToNext());
+
+        }
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
+    }
+
+    private int getimage(int imageno) {
+        int images = 0;
+        switch (imageno) {
+            case 300:
+                images = R.drawable.vsoup;
+                break;
+            case 301:
+                images = R.drawable.corchicksoup;
+                break;
+            case 302:
+                images = R.drawable.greensald;
+                break;
+            case 200:
+                images = R.drawable.vcutlets;
+                break;
+            case 201:
+                images = R.drawable.mushroom;
+                break;
+            case 202:
+                images = R.drawable.gobis;
+                break;
+            case 203:
+                images = R.drawable.gobichill;
+                break;
+            case 204:
+                images = R.drawable.vegpakora;
+                break;
+            case 205:
+                images = R.drawable.corn;
+                break;
+            case 206:
+                images = R.drawable.chillp;
+                break;
+            case 207:
+                images = R.drawable.fcutlet;
+                break;
+            case 208:
+                images = R.drawable.natholi;
+                break;
+            case 209:
+                images = R.drawable.fpakora;
+                break;
+            case 210:
+                images = R.drawable.gshrimp;
+                break;
+            case 211:
+                images = R.drawable.chemeen;
+                break;
+            case 212:
+                images = R.drawable.travancore;
+                break;
+            case 213:
+                images = R.drawable.chillchick;
+                break;
+            case 214:
+                images = R.drawable.chick65;
+                break;
+            case 215:
+                images = R.drawable.chicktick;
+                break;
+            case 216:
+                images = R.drawable.beefcut;
+                break;
+            case 303:
+                images = R.drawable.greenpeass;
+                break;
+            case 304:
+                images = R.drawable.vegstews;
+                break;
+            case 305:
+                images = R.drawable.kadalas;
+                break;
+            case 306:
+                images = R.drawable.vegtheeyals;
+                break;
+            case 307:
+                images = R.drawable.avials;
+                break;
+            case 308:
+                images = R.drawable.vegmappass;
+                break;
+            case 309:
+                images = R.drawable.morcurries;
+                break;
+            case 400:
+                images = R.drawable.fmolees;
+                break;
+            case 401:
+                images = R.drawable.fishporicha;
+                break;
+            case 402:
+                images = R.drawable.grillfishfr;
+                break;
+            case 403:
+                images = R.drawable.fishporicha;
+                break;
+            case 404:
+                images = R.drawable.fishcurry;
+                break;
+            case 405:
+                images = R.drawable.chemmeenfry;
+                break;
+            case 406:
+                images = R.drawable.crabfry;
+                break;
+            case 500:
+                images = R.drawable.porichas;
+                break;
+            case 501:
+                images = R.drawable.chickmappas;
+                break;
+            case 502:
+                images = R.drawable.chickulli;
+                break;
+            case 503:
+                images = R.drawable.chickrost;
+                break;
+            case 504:
+                images = R.drawable.chickpepr;
+                break;
+            case 505:
+                images = R.drawable.chicktik;
+                break;
+            case 506:
+                images = R.drawable.eggmasal;
+                break;
+            case 507:
+                images = R.drawable.omlette;
+                break;
+            case 600:
+                images = R.drawable.goatcurr;
+                break;
+            case 601:
+                images = R.drawable.goatrogans;
+                break;
+            case 602:
+                images = R.drawable.goatpeprs;
+                break;
+            case 603:
+                images = R.drawable.beeffri;
+                break;
+            case 604:
+                images = R.drawable.beefullis;
+                break;
+            case 605:
+                images = R.drawable.beefcurs;
+                break;
+            case 606:
+                images = R.drawable.beefchil;
+                break;
+            case 700:
+                images = R.drawable.malbrchickbr;
+                break;
+            case 701:
+                images = R.drawable.chickdumsbir;
+                break;
+            case 702:
+                images = R.drawable.muttonbir;
+                break;
+            case 703:
+                images = R.drawable.eggbir;
+                break;
+            case 704:
+                images = R.drawable.vegbiry;
+                break;
+            case 705:
+                images = R.drawable.gheerce;
+                break;
+            case 706:
+                images = R.drawable.vegfryrice;
+                break;
+            case 707:
+                images = R.drawable.chickfryrce;
+                break;
+            case 708:
+                images = R.drawable.vegwrap;
+                break;
+            case 709:
+                images = R.drawable.gobiwraps;
+                break;
+            case 710:
+                images = R.drawable.chicktickwrap;
+                break;
+            case 711:
+                images = R.drawable.beefwraps;
+                break;
+            case 800:
+                images = R.drawable.rotis;
+                break;
+            case 801:
+                images = R.drawable.garlicsnaan;
+                break;
+            case 802:
+                images = R.drawable.chapatis;
+                break;
+            case 803:
+                images = R.drawable.eggchillparatha;
+                break;
+            case 804:
+                images = R.drawable.appams;
+                break;
+            case 805:
+                images = R.drawable.puttuus;
+                break;
+            case 806:
+                images = R.drawable.iddipaam;
+                break;
+            case 807:
+                images = R.drawable.kappaa;
+                break;
+            case 808:
+                images = R.drawable.fruitbowls;
+                break;
+            case 809:
+                images = R.drawable.icecreams;
+                break;
+            case 810:
+                images = R.drawable.faludas;
+                break;
+            case 811:
+                images = R.drawable.gulbjamun;
+                break;
+            case 812:
+                images = R.drawable.paysampradhan;
+                break;
+            case 900:
+                images = R.drawable.softdrinksres;
+                break;
+            case 901:
+                images = R.drawable.buttermlk;
+                break;
+            case 902:
+                images = R.drawable.plinlassi;
+                break;
+            case 903:
+                images = R.drawable.mangolassis;
+                break;
+            case 904:
+                images = R.drawable.limesoda;
+                break;
+            case 905:
+                images = R.drawable.orangejuce;
+                break;
+            case 906:
+                images = R.drawable.teas;
+                break;
+            case 907:
+                images = R.drawable.coffeess;
+                break;
+        }
+        return images;
     }
 }

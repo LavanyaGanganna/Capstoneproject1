@@ -21,7 +21,7 @@ public class StartersListClass {
         double price = 0;
         for (Starterclass starterclass : starterclasses) {
             price = price + Double.parseDouble(starterclass.getPrices().substring(1));
-            Log.d(TAG, "the price is" + price);
+            // Log.d(TAG, "the price is" + price);
         }
         price = Math.floor(price * 100) / 100;
         return price;

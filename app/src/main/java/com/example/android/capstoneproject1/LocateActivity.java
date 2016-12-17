@@ -48,6 +48,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 public class LocateActivity extends AppCompatActivity implements OnMapReadyCallback, android.location.LocationListener {
 
@@ -74,10 +75,10 @@ public class LocateActivity extends AppCompatActivity implements OnMapReadyCallb
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_locate);
-        price = getIntent().getDoubleExtra("price", 0);
-        itemcnt = getIntent().getIntExtra("values", 0);
-        rcvdstring = getIntent().getStringExtra("totalcost");
-        selectedlist = getIntent().getParcelableArrayListExtra("summary");
+        price = getIntent().getDoubleExtra(getString(R.string.price), 0);
+        itemcnt = getIntent().getIntExtra(getString(R.string.values), 0);
+        rcvdstring = getIntent().getStringExtra(getString(R.string.total));
+        selectedlist = getIntent().getParcelableArrayListExtra(getString(R.string.summary));
         markerPoints = new ArrayList<LatLng>();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -87,7 +88,7 @@ public class LocateActivity extends AppCompatActivity implements OnMapReadyCallb
         isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
         if (!isGPSEnabled && !isNetworkEnabled) {
             // no network provider is enabled
-            Toast.makeText(this, "GPS is not enabled", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.gpsnot, Toast.LENGTH_SHORT).show();
         }
 
 
@@ -175,11 +176,11 @@ public class LocateActivity extends AppCompatActivity implements OnMapReadyCallb
         }
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        Typeface darllarch = Typeface.createFromAsset(getAssets(), "font/DarkLarch_PERSONAL_USE.ttf");
+        Typeface darllarch = Typeface.createFromAsset(getAssets(), getString(R.string.personalttf));
         TextView mytitle = (TextView) toolbar.getChildAt(0);
         mytitle.setTypeface(darllarch);
         mytitle.setTextSize(30);
-        getSupportActionBar().setTitle("Location");
+        getSupportActionBar().setTitle(R.string.location);
         boolean tabletsize = getResources().getBoolean(R.bool.isTablet);
         if (tabletsize) {
             mytitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 45);
@@ -191,7 +192,7 @@ public class LocateActivity extends AppCompatActivity implements OnMapReadyCallb
         MapReady = true;
         LatLng redchillies = new LatLng(37.428162, -121.906481);
         gmap = map;
-        gmap.addMarker(new MarkerOptions().position(redchillies).title("Red Chillies"));
+        gmap.addMarker(new MarkerOptions().position(redchillies).title(getString(R.string.reds)));
         CameraPosition cp = CameraPosition.builder().target(redchillies).zoom(17).bearing(0).tilt(25).build();
         gmap.moveCamera(CameraUpdateFactory.newCameraPosition(cp));
         try {
@@ -411,16 +412,17 @@ public class LocateActivity extends AppCompatActivity implements OnMapReadyCallb
         int sizes = StartersListClass.starterclasses.size();
         if (sizes != 0) {
             ui_hot.setVisibility(View.VISIBLE);
-            ui_hot.setText(Integer.toString(sizes));
+            // ui_hot.setText(Integer.toString(sizes));
+            ui_hot.setText(String.format(Locale.ENGLISH, "%d", sizes));
             ui_hot.setContentDescription(Integer.toString(sizes) + getString(R.string.itemselected));
         }
         menulayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LocateActivity.this, ViewSummary.class);
-                intent.putExtra("price", price);
-                intent.putExtra("summary", selectedlist);
-                intent.putExtra("totalcost", rcvdstring);
+                intent.putExtra(getString(R.string.price), price);
+                intent.putExtra(getString(R.string.summary), selectedlist);
+                intent.putExtra(getString(R.string.total), rcvdstring);
                 startActivity(intent);
             }
         });
@@ -436,9 +438,9 @@ public class LocateActivity extends AppCompatActivity implements OnMapReadyCallb
     @Override
     public void onBackPressed() {
         Intent returnIntent = new Intent();
-        returnIntent.putExtra("values", itemcnt);
-        returnIntent.putExtra("price", price);
-        returnIntent.putExtra("totalcost", rcvdstring);
+        returnIntent.putExtra(getString(R.string.values), itemcnt);
+        returnIntent.putExtra(getString(R.string.price), price);
+        returnIntent.putExtra(getString(R.string.total), rcvdstring);
         setResult(RESULT_OK, returnIntent);
         finish();
         super.onBackPressed();
@@ -449,9 +451,9 @@ public class LocateActivity extends AppCompatActivity implements OnMapReadyCallb
         switch (item.getItemId()) {
             case android.R.id.home:
                 Intent returnIntent = new Intent();
-                returnIntent.putExtra("values", itemcnt);
-                returnIntent.putExtra("price", price);
-                returnIntent.putExtra("totalcost", rcvdstring);
+                returnIntent.putExtra(getString(R.string.values), itemcnt);
+                returnIntent.putExtra(getString(R.string.price), price);
+                returnIntent.putExtra(getString(R.string.total), rcvdstring);
                 setResult(RESULT_OK, returnIntent);
                 finish();
                 break;
