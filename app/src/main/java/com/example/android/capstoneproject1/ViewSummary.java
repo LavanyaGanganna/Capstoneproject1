@@ -81,11 +81,11 @@ public class ViewSummary extends AppCompatActivity implements SummaryAdapter.Sum
         itemcnt = startersListClass.getsize();
         price = startersListClass.getprice();
         if (startersListClass.getsize() > 1) {
-            textView.setText(String.format(Locale.ENGLISH, "%d " + getString(R.string.itemss) + "%.2f", startersListClass.getsize(), startersListClass.getprice()));
-            recvdstring = String.format(Locale.ENGLISH, "%d " + getString(R.string.itemss) + "%.2f", startersListClass.getsize(), startersListClass.getprice());
+            textView.setText(String.format(Locale.ENGLISH, "%d  %s %.2f", startersListClass.getsize(),getString(R.string.itemss), startersListClass.getprice()));
+            recvdstring = String.format(Locale.ENGLISH, "%d  %s %.2f", startersListClass.getsize(),getString(R.string.itemss), startersListClass.getprice());
         } else {
-            textView.setText(String.format(Locale.ENGLISH, "%d " + getString(R.string.item) + "%.2f", startersListClass.getsize(), startersListClass.getprice()));
-            recvdstring = String.format(Locale.ENGLISH, "%d " + getString(R.string.item) + "%.2f", startersListClass.getsize(), startersListClass.getprice());
+            textView.setText(String.format(Locale.ENGLISH, "%d  %s %.2f", startersListClass.getsize(),getString(R.string.item), startersListClass.getprice()));
+            recvdstring = String.format(Locale.ENGLISH, "%d  %s %.2f", startersListClass.getsize(),getString(R.string.item), startersListClass.getprice());
         }
         addmore.setOnClickListener(new View.OnClickListener() {
             @Override

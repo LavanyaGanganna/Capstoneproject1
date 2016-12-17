@@ -53,7 +53,7 @@ public class DessertsDishes extends AppCompatActivity implements StartersAdapter
         cartbutton = (Button) findViewById(R.id.viewcart);
         textView = (TextView) findViewById(R.id.ordertext);
         StartersListClass startersListClass = new StartersListClass();
-        textView.setText(String.format(Locale.ENGLISH, "%d " + getString(R.string.item) + "%.2f", startersListClass.getsize(), startersListClass.getprice()));
+        textView.setText(String.format(Locale.ENGLISH, "%d  %s %.2f", startersListClass.getsize(), getString(R.string.item), startersListClass.getprice()));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         StartersAdapter startersAdapter = new StartersAdapter(DessertsDishes.this, desertlist, itemcnt, price);
         recyclerView.setAdapter(startersAdapter);

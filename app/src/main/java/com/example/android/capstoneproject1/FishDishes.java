@@ -52,7 +52,7 @@ public class FishDishes extends AppCompatActivity implements StartersAdapter.Dat
         StartersListClass startersListClass = new StartersListClass();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        textView.setText(String.format(Locale.ENGLISH, "%d " + getString(R.string.item) + "%.2f", startersListClass.getsize(), startersListClass.getprice()));
+        textView.setText(String.format(Locale.ENGLISH, "%d  %s %.2f", startersListClass.getsize(),getString(R.string.item), startersListClass.getprice()));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         StartersAdapter startersAdapter = new StartersAdapter(FishDishes.this, fishdishlist, itemcnt, price);
         recyclerView.setAdapter(startersAdapter);

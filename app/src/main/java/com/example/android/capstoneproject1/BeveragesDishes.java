@@ -52,7 +52,7 @@ public class BeveragesDishes extends AppCompatActivity implements StartersAdapte
         cartbutton = (Button) findViewById(R.id.viewcart);
         textView = (TextView) findViewById(R.id.ordertext);
         StartersListClass startersListClass = new StartersListClass();
-        textView.setText(String.format(Locale.ENGLISH, "%d " + getString(R.string.item) + "%.2f", startersListClass.getsize(), startersListClass.getprice()));
+        textView.setText(String.format(Locale.ENGLISH, "%d  %s %.2f", startersListClass.getsize(),getString(R.string.item), startersListClass.getprice()));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         StartersAdapter startersAdapter = new StartersAdapter(BeveragesDishes.this, beveragelist, itemcnt, price);
         recyclerView.setAdapter(startersAdapter);

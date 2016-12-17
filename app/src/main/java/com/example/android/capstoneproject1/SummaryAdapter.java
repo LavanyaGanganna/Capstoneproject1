@@ -72,9 +72,9 @@ public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.ViewHold
                         notifyItemRangeChanged(holder.getAdapterPosition(), selectlist.size());
                         StartersListClass startersListClass = new StartersListClass();
                         if (startersListClass.getsize() > 1) {
-                            tosend = String.format(Locale.ENGLISH, "%d " + mcontext.getString(R.string.itemss) + "%.2f", startersListClass.getsize(), startersListClass.getprice());
+                            tosend = String.format(Locale.ENGLISH, "%d  %s %.2f", startersListClass.getsize(),mcontext.getString(R.string.itemss), startersListClass.getprice());
                         } else {
-                            tosend = String.format(Locale.ENGLISH, "%d " + mcontext.getString(R.string.item) + "%.2f", startersListClass.getsize(), startersListClass.getprice());
+                            tosend = String.format(Locale.ENGLISH, "%d  %s  %.2f", startersListClass.getsize(),mcontext.getString(R.string.item), startersListClass.getprice());
                         }
                         summaryInterface.showValues(startersListClass.getsize(), startersListClass.getprice(), tosend);
                     }

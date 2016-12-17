@@ -108,9 +108,9 @@ public class StartersAdapter extends RecyclerView.Adapter<StartersAdapter.ViewHo
                 Toast.makeText(mcontext, R.string.itemaddeds, Toast.LENGTH_SHORT).show();
                 updatewidget();
                 if (startersListClass.getsize() > 1) {
-                    tosend = String.format(Locale.ENGLISH, "%d " + mcontext.getString(R.string.itemss) + "%.2f", startersListClass.getsize(), startersListClass.getprice());
+                    tosend = String.format(Locale.ENGLISH, "%d  %s %.2f", startersListClass.getsize(),mcontext.getString(R.string.itemss),startersListClass.getprice());
                 } else {
-                    tosend = String.format(Locale.ENGLISH, "%d " + mcontext.getString(R.string.item) + "%.2f", startersListClass.getsize(), startersListClass.getprice());
+                    tosend = String.format(Locale.ENGLISH, "%d  %s %.2f", startersListClass.getsize(),mcontext.getString(R.string.item), startersListClass.getprice());
                 }
                 dataTransferInterface.setValues(startersListClass.getsize(), startersListClass.getprice(), tosend);
 

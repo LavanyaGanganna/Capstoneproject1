@@ -54,9 +54,9 @@ public class StartersActivity extends AppCompatActivity implements StartersAdapt
         recvdstring = getIntent().getStringExtra(getString(R.string.total));
         StartersListClass startersListClass = new StartersListClass();
         if (startersListClass.getsize() > 1) {
-            textView.setText(String.format(Locale.ENGLISH, "%d " + getString(R.string.itemss) + "%.2f", startersListClass.getsize(), startersListClass.getprice()));
+            textView.setText(String.format(Locale.ENGLISH, "%d  %s %.2f", startersListClass.getsize(),getString(R.string.itemss), startersListClass.getprice()));
         } else {
-            textView.setText(String.format(Locale.ENGLISH, "%d " + getString(R.string.item) + "%.2f", startersListClass.getsize(), startersListClass.getprice()));
+            textView.setText(String.format(Locale.ENGLISH, "%d  %s %.2f", startersListClass.getsize(),getString(R.string.item), startersListClass.getprice()));
         }
         cartbutton = (Button) findViewById(R.id.viewcart);
         // Log.d(TAG, "oncreate");

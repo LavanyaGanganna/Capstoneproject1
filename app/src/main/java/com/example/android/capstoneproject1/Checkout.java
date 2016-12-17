@@ -63,7 +63,7 @@ public class Checkout extends AppCompatActivity implements CheckoutFragment.Call
         boolean paylogin = prefs.getBoolean(getString(R.string.paylogin), false);
         if (paylogin) {
             StartersListClass startersListClass = new StartersListClass();
-            String displays = String.format(Locale.ENGLISH, "%d " + getString(R.string.item) + "%.2f", startersListClass.getsize(), startersListClass.getprice());
+            String displays = String.format(Locale.ENGLISH, "%d  %s %.2f", startersListClass.getsize(),getString(R.string.item), startersListClass.getprice());
             display.setText(displays);
             SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
             pref.edit().putBoolean(getString(R.string.paylogin), false).apply();
