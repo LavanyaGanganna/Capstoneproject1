@@ -59,7 +59,7 @@ public class CheckoutFragment extends Fragment implements AdapterView.OnItemSele
         totalcost = (TextView) view.findViewById(R.id.totalprice);
         // display= (TextView) getActivity().findViewById(R.id.displayid);
         StartersListClass startersListClass = new StartersListClass();
-        pricetext.setText(String.format("%s%s",getString(R.string.dollr),startersListClass.getprice()));
+        pricetext.setText(String.format("%s%s", getString(R.string.dollr), startersListClass.getprice()));
         pricetext.setContentDescription(price + getString(R.string.dollar));
         tax.setText(String.format(getString(R.string.dollr) + "%s", 1.0));
         tax.setContentDescription(getString(R.string.dollarone));

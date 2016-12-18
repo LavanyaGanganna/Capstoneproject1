@@ -99,7 +99,7 @@ public class SignIn extends AppCompatActivity implements GoogleApiClient.OnConne
                     case R.id.sign_in_button:
                         signIn();
                         break;
-                    // ...
+
                 }
             }
         });

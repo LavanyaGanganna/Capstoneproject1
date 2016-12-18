@@ -12,7 +12,7 @@
     tools:showIn="@layout/activity_fish_dishes">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclefish"
+        android:id="@+id/recycleview"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen0"
         android:layout_weight="8.5">

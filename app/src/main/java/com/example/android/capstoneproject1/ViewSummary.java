@@ -55,6 +55,9 @@ public class ViewSummary extends AppCompatActivity implements SummaryAdapter.Sum
         setContentView(R.layout.activity_view_summary);
         itemcnt = getIntent().getIntExtra(getString(R.string.values), 0);
         price = getIntent().getDoubleExtra(getString(R.string.price), 0);
+        StartersListClass startersListClass = new StartersListClass();
+        itemcnt = startersListClass.getsize();
+        price = startersListClass.getprice();
         recvdstring = getIntent().getStringExtra(getString(R.string.total));
         recyclerView = (RecyclerView) findViewById(R.id.list);
         textView = (TextView) findViewById(R.id.totaltext);
@@ -73,7 +76,6 @@ public class ViewSummary extends AppCompatActivity implements SummaryAdapter.Sum
             mytitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 45);
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        StartersListClass startersListClass = new StartersListClass();
         summaryAdapter = new SummaryAdapter(ViewSummary.this, StartersListClass.starterclasses);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -81,11 +83,11 @@ public class ViewSummary extends AppCompatActivity implements SummaryAdapter.Sum
         itemcnt = startersListClass.getsize();
         price = startersListClass.getprice();
         if (startersListClass.getsize() > 1) {
-            textView.setText(String.format(Locale.ENGLISH, "%d  %s %.2f", startersListClass.getsize(),getString(R.string.itemss), startersListClass.getprice()));
-            recvdstring = String.format(Locale.ENGLISH, "%d  %s %.2f", startersListClass.getsize(),getString(R.string.itemss), startersListClass.getprice());
+            textView.setText(String.format(Locale.ENGLISH, "%d  %s %.2f", startersListClass.getsize(), getString(R.string.itemss), startersListClass.getprice()));
+            recvdstring = String.format(Locale.ENGLISH, "%d  %s %.2f", startersListClass.getsize(), getString(R.string.itemss), startersListClass.getprice());
         } else {
-            textView.setText(String.format(Locale.ENGLISH, "%d  %s %.2f", startersListClass.getsize(),getString(R.string.item), startersListClass.getprice()));
-            recvdstring = String.format(Locale.ENGLISH, "%d  %s %.2f", startersListClass.getsize(),getString(R.string.item), startersListClass.getprice());
+            textView.setText(String.format(Locale.ENGLISH, "%d  %s %.2f", startersListClass.getsize(), getString(R.string.item), startersListClass.getprice()));
+            recvdstring = String.format(Locale.ENGLISH, "%d  %s %.2f", startersListClass.getsize(), getString(R.string.item), startersListClass.getprice());
         }
         addmore.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,10 +121,13 @@ public class ViewSummary extends AppCompatActivity implements SummaryAdapter.Sum
 
     @Override
     public void onBackPressed() {
+        StartersListClass startersListClass = new StartersListClass();
+        itemcnt = startersListClass.getsize();
         Intent returnIntent = new Intent();
         returnIntent.putExtra(getString(R.string.price), price);
         returnIntent.putExtra(getString(R.string.values), itemcnt);
         returnIntent.putExtra(getString(R.string.total), recvdstring);
+        returnIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         SharedPreferences Preferences = PreferenceManager.getDefaultSharedPreferences(this);
         Preferences.edit().putBoolean(getString(R.string.backpress), true).apply();
         setResult(RESULT_OK, returnIntent);

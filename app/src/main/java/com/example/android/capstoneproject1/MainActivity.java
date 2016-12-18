@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         new EndpointsAsyncTask().execute(getString(R.string.admin), getString(R.string.passman), null);
         runOnUiThread(new Runnable() {
             @Override

@@ -11,7 +11,7 @@
     tools:context="com.example.android.capstoneproject1.SoupsActivity">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclebreads"
+        android:id="@+id/recycleview"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen0"
         android:layout_weight="8.5">

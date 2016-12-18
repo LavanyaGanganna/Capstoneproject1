@@ -56,14 +56,17 @@ public class Checkout extends AppCompatActivity implements CheckoutFragment.Call
         setContentView(R.layout.activity_checkout);
         price = getIntent().getDoubleExtra(getString(R.string.price), 0);
         itemcnt = getIntent().getIntExtra(getString(R.string.values), 0);
+        StartersListClass startersListClass = new StartersListClass();
+        itemcnt = startersListClass.getsize();
+        price = startersListClass.getprice();
         recvdstring = getIntent().getStringExtra(getString(R.string.total));
         display = (TextView) findViewById(R.id.displayid);
         display.setText(recvdstring);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         boolean paylogin = prefs.getBoolean(getString(R.string.paylogin), false);
         if (paylogin) {
-            StartersListClass startersListClass = new StartersListClass();
-            String displays = String.format(Locale.ENGLISH, "%d  %s %.2f", startersListClass.getsize(),getString(R.string.item), startersListClass.getprice());
+            StartersListClass startersListClasses = new StartersListClass();
+            String displays = String.format(Locale.ENGLISH, "%d  %s %.2f", startersListClasses.getsize(), getString(R.string.item), startersListClasses.getprice());
             display.setText(displays);
             SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
             pref.edit().putBoolean(getString(R.string.paylogin), false).apply();

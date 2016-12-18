@@ -66,6 +66,10 @@ public class HomeFragment extends Fragment {
     String rcvdstring = null;
     ArrayList<Starterclass> selectedlist = null;
     private ProgressDialog mProgressDialog;
+    private static final int MENU_HOME=5;
+    private static final int MENU_NAV=2;
+    private static final int LOCAT_NAV=6;
+    private static final int OUR_MENU_CODE=3;
 
     @Nullable
     @Override
@@ -73,6 +77,10 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.home, container, false);
         setHasOptionsMenu(true);
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        StartersListClass startersListClass = new StartersListClass();
+        itemcnt=startersListClass.getsize();
+        Log.d(TAG,"the itemcnt in oncreate"+ itemcnt);
+        price=startersListClass.getprice();
         lists = (ListView) view.findViewById(R.id.lists);
         mProgressDialog = new ProgressDialog(getContext());
         mProgressDialog.setTitle(getString(R.string.bakingappam));
@@ -235,6 +243,7 @@ public class HomeFragment extends Fragment {
             ui_hot.setVisibility(View.VISIBLE);
             // ui_hot.setText(Integer.toString(sizes));
             ui_hot.setText(String.format(Locale.ENGLISH, "%d", sizes));
+            Log.d(TAG,"the itemcnt in createmenu"+ itemcnt);
             ui_hot.setContentDescription(Integer.toString(sizes) + getString(R.string.itemselected));
         }
         Drawable drawable = menu.getItem(0).getIcon();
@@ -246,7 +255,7 @@ public class HomeFragment extends Fragment {
                 intent.putExtra(getString(R.string.summary), selectedlist);
                 intent.putExtra(getString(R.string.price), price);
                 intent.putExtra(getString(R.string.total), rcvdstring);
-                startActivity(intent);
+                startActivityForResult(intent,MENU_HOME);
             }
         });
 
@@ -258,50 +267,26 @@ public class HomeFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         //  super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 2) {
+        if (requestCode == MENU_NAV || requestCode==LOCAT_NAV || requestCode==OUR_MENU_CODE || requestCode==MENU_HOME){
             if (resultCode == Activity.RESULT_OK) {
                 int value = data.getIntExtra(getString(R.string.values), 0);
                 rcvdstring = data.getStringExtra(getString(R.string.total));
                 price = data.getDoubleExtra(getString(R.string.price), 0);
                 itemcnt = value;
-                if (value != 0) {
+                StartersListClass startersListClass = new StartersListClass();
+                itemcnt=startersListClass.getsize();
+                Log.d(TAG,"the itemcnt in result"+ itemcnt);
+                if (itemcnt != 0) {
                     ui_hot.setVisibility(View.VISIBLE);
-                    //    ui_hot.setText(Integer.toString(value));
-                    ui_hot.setText(String.format(Locale.ENGLISH, "%d", value));
-                    ui_hot.setContentDescription(Integer.toString(value) + getString(R.string.itemselected));
+                    ui_hot.setText(String.format(Locale.ENGLISH, "%d", itemcnt));
+                    ui_hot.setContentDescription(Integer.toString(itemcnt) + getString(R.string.itemselected));
+                }
+                else{
+                    ui_hot.setVisibility(View.GONE);
                 }
             }
         }
 
-        if (requestCode == 6) {
-            if (resultCode == Activity.RESULT_OK) {
-                int value = data.getIntExtra(getString(R.string.values), 0);
-                rcvdstring = data.getStringExtra(getString(R.string.total));
-                price = data.getDoubleExtra(getString(R.string.price), 0);
-                itemcnt = value;
-                if (value != 0) {
-                    ui_hot.setVisibility(View.VISIBLE);
-                    //   ui_hot.setText(Integer.toString(value));
-                    ui_hot.setText(String.format(Locale.ENGLISH, "%d", value));
-                    ui_hot.setContentDescription(Integer.toString(value) + getString(R.string.itemselected));
-                }
-            }
-        }
-        if (requestCode == 3) {
-            if (resultCode == Activity.RESULT_OK) {
-                int value = data.getIntExtra(getString(R.string.values), 0);
-                rcvdstring = data.getStringExtra(getString(R.string.total));
-                price = data.getDoubleExtra(getString(R.string.price), 0);
-                //  Log.d(TAG, "the price is" + price);
-                itemcnt = value;
-                if (value != 0) {
-                    ui_hot.setVisibility(View.VISIBLE);
-                    // ui_hot.setText(Integer.toString(value));
-                    ui_hot.setText(String.format(Locale.ENGLISH, "%d", value));
-                    ui_hot.setContentDescription(Integer.toString(value) + getString(R.string.itemselected));
-                }
-            }
-        }
     }
 
     @Override

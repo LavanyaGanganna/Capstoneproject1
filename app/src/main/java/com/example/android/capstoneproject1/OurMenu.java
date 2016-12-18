@@ -60,12 +60,18 @@ public class OurMenu extends AppCompatActivity implements LoaderManager.LoaderCa
     private static final int BREAD_REQUEST_CODE = 9;
     private static final int DESSERT_REQUEST_CODE = 10;
     private static final int BEVERAGE_REQUEST_CODE = 11;
+    private static final int MENU_CODE = 12;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_our_menu);
-
+        itemcnt = getIntent().getIntExtra(getString(R.string.values), 0);
+        price = getIntent().getDoubleExtra(getString(R.string.price), 0);
+        rcvdstring = getIntent().getStringExtra(getString(R.string.total));
+        StartersListClass startersListClass = new StartersListClass();
+        itemcnt = startersListClass.getsize();
+        price = startersListClass.getprice();
         setProgressBarIndeterminateVisibility(false);
         runOnUiThread(new Runnable() {
             @Override
@@ -78,9 +84,7 @@ public class OurMenu extends AppCompatActivity implements LoaderManager.LoaderCa
             }
         });
 
-        itemcnt = getIntent().getIntExtra(getString(R.string.values), 0);
-        price = getIntent().getDoubleExtra(getString(R.string.price), 0);
-        rcvdstring = getIntent().getStringExtra(getString(R.string.total));
+
         listView = (ListView) findViewById(R.id.menulist);
         Menus.add(new MenuList(R.drawable.starter, getString(R.string.starterss)));
         Menus.add(new MenuList(R.drawable.soupsalad, getString(R.string.soupss)));
@@ -99,114 +103,42 @@ public class OurMenu extends AppCompatActivity implements LoaderManager.LoaderCa
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i == 0) {
-                    startSubmenuActivityForResult(StartersActivity.class,STARTERS_REQUEST_CODE);
-                    /*
-                    Intent intent = new Intent(OurMenu.this, StartersActivity.class);
-                    intent.putExtra(getString(R.string.values), itemcnt);
-                    intent.putExtra(getString(R.string.price), price);
-                    //  Log.d(TAG, "going price" + price);
-                    intent.putExtra(getString(R.string.total), rcvdstring);
-                    startActivityForResult(intent, STARTERS_REQUEST_CODE);*/
+                    startSubmenuActivityForResult(StartersActivity.class, STARTERS_REQUEST_CODE);
                 }
                 if (i == 1) {
-                    startSubmenuActivityForResult(SoupsActivity.class,SOUPS_REQUEST_CODE);
-                    /*
-                    Intent intent = new Intent(OurMenu.this, SoupsActivity.class);
-                    intent.putExtra(getString(R.string.values), itemcnt);
-                    intent.putExtra(getString(R.string.price), price);
-                    //  Log.d(TAG, "going price" + price);
-                    intent.putExtra(getString(R.string.total), rcvdstring);
-                    startActivityForResult(intent, SOUPS_REQUEST_CODE);*/
+                    startSubmenuActivityForResult(SoupsActivity.class, SOUPS_REQUEST_CODE);
                 }
                 if (i == 2) {
-                    startSubmenuActivityForResult(Vegetarian.class,VEGGIES_REQUEST_CODE);
-                    /*
-                    Intent intent = new Intent(OurMenu.this, Vegetarian.class);
-                    intent.putExtra(getString(R.string.values), itemcnt);
-                    intent.putExtra(getString(R.string.price), price);
-                    //   Log.d(TAG, "going price" + price);
-                    intent.putExtra(getString(R.string.total), rcvdstring);
-                    startActivityForResult(intent, VEGGIES_REQUEST_CODE);*/
+                    startSubmenuActivityForResult(Vegetarian.class, VEGGIES_REQUEST_CODE);
                 }
                 if (i == 3) {
-                    startSubmenuActivityForResult(FishDishes.class,FISH_REQUEST_CODE);
-                    /*
-                    Intent intent = new Intent(OurMenu.this, FishDishes.class);
-                    intent.putExtra(getString(R.string.values), itemcnt);
-                    intent.putExtra(getString(R.string.price), price);
-                    // Log.d(TAG, "going price" + price);
-                    intent.putExtra(getString(R.string.total), rcvdstring);
-                    startActivityForResult(intent, FISH_REQUEST_CODE);*/
+                    startSubmenuActivityForResult(FishDishes.class, FISH_REQUEST_CODE);
                 }
                 if (i == 4) {
-                    startSubmenuActivityForResult(BirdsNest.class,BIRDS_REQUEST_CODE);
-                    /*Intent intent = new Intent(OurMenu.this, BirdsNest.class);
-                    intent.putExtra(getString(R.string.values), itemcnt);
-                    intent.putExtra(getString(R.string.price), price);
-                    //   Log.d(TAG, "going price" + price);
-                    intent.putExtra(getString(R.string.total), rcvdstring);
-                    startActivityForResult(intent, BIRDS_REQUEST_CODE);*/
+                    startSubmenuActivityForResult(BirdsNest.class, BIRDS_REQUEST_CODE);
                 }
 
                 if (i == 5) {
-                    startSubmenuActivityForResult(MeatDishes.class,MEAT_REQUEST_CODE);
-                    /*
-                    Intent intent = new Intent(OurMenu.this, MeatDishes.class);
-                    intent.putExtra(getString(R.string.values), itemcnt);
-                    intent.putExtra(getString(R.string.price), price);
-                    //  Log.d(TAG, "going price" + price);
-                    intent.putExtra(getString(R.string.total), rcvdstring);
-                    startActivityForResult(intent, MEAT_REQUEST_CODE);*/
+                    startSubmenuActivityForResult(MeatDishes.class, MEAT_REQUEST_CODE);
                 }
                 if (i == 6) {
-
-                    startSubmenuActivityForResult(Biryani.class,BIRYANI_REQUEST_CODE);
-                   /* Intent intent = new Intent(OurMenu.this, Biryani.class);
-                    intent.putExtra(getString(R.string.values), itemcnt);
-                    intent.putExtra(getString(R.string.price), price);
-                    // Log.d(TAG, "going price" + price);
-                    intent.putExtra(getString(R.string.total), rcvdstring);
-                    startActivityForResult(intent, BIRYANI_REQUEST_CODE);*/
+                    startSubmenuActivityForResult(Biryani.class, BIRYANI_REQUEST_CODE);
                 }
 
                 if (i == 7) {
-                    startSubmenuActivityForResult(WrapDishes.class,WRAP_REQUEST_CODE);
-                    /*
-                    Intent intent = new Intent(OurMenu.this, WrapDishes.class);
-                    intent.putExtra(getString(R.string.values), itemcnt);
-                    intent.putExtra(getString(R.string.price), price);
-                    //   Log.d(TAG, "going price" + price);
-                    intent.putExtra(getString(R.string.total), rcvdstring);
-                    startActivityForResult(intent, WRAP_REQUEST_CODE);*/
+                    startSubmenuActivityForResult(WrapDishes.class, WRAP_REQUEST_CODE);
                 }
 
                 if (i == 8) {
-                    startSubmenuActivityForResult(BreadsDishes.class,BREAD_REQUEST_CODE);
-                   /* Intent intent = new Intent(OurMenu.this, BreadsDishes.class);
-                    intent.putExtra(getString(R.string.values), itemcnt);
-                    intent.putExtra(getString(R.string.price), price);
-                    //   Log.d(TAG, "going price" + price);
-                    intent.putExtra(getString(R.string.total), rcvdstring);
-                    startActivityForResult(intent, BREAD_REQUEST_CODE);*/
+                    startSubmenuActivityForResult(BreadsDishes.class, BREAD_REQUEST_CODE);
+
                 }
                 if (i == 9) {
-                    startSubmenuActivityForResult(DessertsDishes.class,DESSERT_REQUEST_CODE);
-                    /*Intent intent = new Intent(OurMenu.this, DessertsDishes.class);
-                    intent.putExtra(getString(R.string.values), itemcnt);
-                    intent.putExtra(getString(R.string.price), price);
-                    //  Log.d(TAG, "going price" + price);
-                    intent.putExtra(getString(R.string.total), rcvdstring);
-                    startActivityForResult(intent, DESSERT_REQUEST_CODE);*/
+                    startSubmenuActivityForResult(DessertsDishes.class, DESSERT_REQUEST_CODE);
                 }
 
                 if (i == 10) {
-                    startSubmenuActivityForResult(BeveragesDishes.class,BEVERAGE_REQUEST_CODE);
-                  /*  Intent intent = new Intent(OurMenu.this, BeveragesDishes.class);
-                    intent.putExtra(getString(R.string.values), itemcnt);
-                    intent.putExtra(getString(R.string.price), price);
-                    //  Log.d(TAG, "going price" + price);
-                    intent.putExtra(getString(R.string.total), rcvdstring);
-                    startActivityForResult(intent, BEVERAGE_REQUEST_CODE);*/
+                    startSubmenuActivityForResult(BeveragesDishes.class, BEVERAGE_REQUEST_CODE);
                 }
 
             }
@@ -224,6 +156,7 @@ public class OurMenu extends AppCompatActivity implements LoaderManager.LoaderCa
             mytitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, 45);
         }
     }
+
     private void startSubmenuActivityForResult(Class type, int requestCode) {
         Intent intent = new Intent(this, type);
         intent.putExtra(getString(R.string.values), itemcnt);
@@ -231,6 +164,7 @@ public class OurMenu extends AppCompatActivity implements LoaderManager.LoaderCa
         intent.putExtra(getString(R.string.total), rcvdstring);
         startActivityForResult(intent, requestCode);
     }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -243,18 +177,23 @@ public class OurMenu extends AppCompatActivity implements LoaderManager.LoaderCa
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == STARTERS_REQUEST_CODE || requestCode == SOUPS_REQUEST_CODE || requestCode == VEGGIES_REQUEST_CODE || requestCode == FISH_REQUEST_CODE || requestCode == BIRDS_REQUEST_CODE
                 || requestCode == MEAT_REQUEST_CODE || requestCode == BIRYANI_REQUEST_CODE || requestCode == WRAP_REQUEST_CODE || requestCode == BREAD_REQUEST_CODE ||
-                requestCode == DESSERT_REQUEST_CODE || requestCode == BEVERAGE_REQUEST_CODE) {
+                requestCode == DESSERT_REQUEST_CODE || requestCode == BEVERAGE_REQUEST_CODE || requestCode == MENU_CODE) {
             if (resultCode == RESULT_OK) {
                 int value = data.getIntExtra(getString(R.string.values), 0);
                 rcvdstring = data.getStringExtra(getString(R.string.total));
                 price = data.getDoubleExtra(getString(R.string.price), 0);
                 //   Log.d(TAG, "the price is" + price);
                 itemcnt = value;
-                if (value != 0) {
+                StartersListClass startersListClass = new StartersListClass();
+                itemcnt = startersListClass.getsize();
+                if (itemcnt != 0) {
                     ui_hot.setVisibility(View.VISIBLE);
                     // ui_hot.setText(Integer.toString(value));
-                    ui_hot.setText(String.format(Locale.ENGLISH, "%d", value));
-                    ui_hot.setContentDescription(Integer.toString(value) + getString(R.string.itemselected));
+                    ui_hot.setText(String.format(Locale.ENGLISH, "%d", itemcnt));
+                    ui_hot.setContentDescription(Integer.toString(itemcnt) + getString(R.string.itemselected));
+                }
+                else{
+                    ui_hot.setVisibility(View.GONE);
                 }
             }
         }
@@ -281,7 +220,7 @@ public class OurMenu extends AppCompatActivity implements LoaderManager.LoaderCa
                 Intent intent = new Intent(OurMenu.this, ViewSummary.class);
                 intent.putExtra(getString(R.string.price), price);
                 intent.putExtra(getString(R.string.total), rcvdstring);
-                startActivity(intent);
+                startActivityForResult(intent, MENU_CODE);
             }
         });
         Drawable drawable = menu.getItem(0).getIcon();
@@ -291,13 +230,16 @@ public class OurMenu extends AppCompatActivity implements LoaderManager.LoaderCa
         return true;
     }
 
-
     @Override
     public void onBackPressed() {
+        StartersListClass startersListClass = new StartersListClass();
+        itemcnt = startersListClass.getsize();
+        price = startersListClass.getprice();
         Intent returnIntent = new Intent();
         returnIntent.putExtra(getString(R.string.values), itemcnt);
         returnIntent.putExtra(getString(R.string.price), price);
         returnIntent.putExtra(getString(R.string.total), rcvdstring);
+        returnIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         SharedPreferences Preferences = PreferenceManager.getDefaultSharedPreferences(this);
         Preferences.edit().putBoolean(getString(R.string.backpress), true).apply();
         setResult(RESULT_OK, returnIntent);
@@ -310,6 +252,9 @@ public class OurMenu extends AppCompatActivity implements LoaderManager.LoaderCa
         switch (item.getItemId()) {
             case android.R.id.home:
                 Intent returnIntent = new Intent();
+                StartersListClass startersListClass = new StartersListClass();
+                itemcnt = startersListClass.getsize();
+                price = startersListClass.getprice();
                 returnIntent.putExtra(getString(R.string.values), itemcnt);
                 returnIntent.putExtra(getString(R.string.price), price);
                 returnIntent.putExtra(getString(R.string.total), rcvdstring);

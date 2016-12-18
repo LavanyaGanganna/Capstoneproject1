@@ -53,6 +53,7 @@ import java.util.Locale;
 public class LocateActivity extends AppCompatActivity implements OnMapReadyCallback, android.location.LocationListener {
 
     private static final String TAG = LocateActivity.class.getSimpleName();
+    private static final int MAP_MENU_CODE = 8;
     GoogleMap gmap;
     ArrayList<LatLng> markerPoints;
     LocationManager locationManager;
@@ -423,7 +424,7 @@ public class LocateActivity extends AppCompatActivity implements OnMapReadyCallb
                 intent.putExtra(getString(R.string.price), price);
                 intent.putExtra(getString(R.string.summary), selectedlist);
                 intent.putExtra(getString(R.string.total), rcvdstring);
-                startActivity(intent);
+                startActivityForResult(intent,MAP_MENU_CODE);
             }
         });
         Drawable drawable = menu.getItem(0).getIcon();
@@ -434,7 +435,29 @@ public class LocateActivity extends AppCompatActivity implements OnMapReadyCallb
 
 
     }
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == MAP_MENU_CODE) {
+            if (resultCode == RESULT_OK) {
+                int value = data.getIntExtra(getString(R.string.values), 0);
+                rcvdstring = data.getStringExtra(getString(R.string.total));
+                price = data.getDoubleExtra(getString(R.string.price), 0);
+                //   Log.d(TAG, "the price is" + price);
+                itemcnt = value;
+                StartersListClass startersListClass = new StartersListClass();
+                itemcnt = startersListClass.getsize();
+                if (itemcnt != 0) {
+                    ui_hot.setVisibility(View.VISIBLE);
+                    // ui_hot.setText(Integer.toString(value));
+                    ui_hot.setText(String.format(Locale.ENGLISH, "%d", itemcnt));
+                    ui_hot.setContentDescription(Integer.toString(itemcnt) + getString(R.string.itemselected));
+                } else {
+                    ui_hot.setVisibility(View.GONE);
+                }
+            }
+        }
+    }
     @Override
     public void onBackPressed() {
         Intent returnIntent = new Intent();

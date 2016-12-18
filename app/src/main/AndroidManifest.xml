@@ -130,7 +130,7 @@
             android:name=".ViewSummary"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_view_summary"
-            android:parentActivityName=".StartersActivity"
+            android:parentActivityName=".OurMenu"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
             <meta-data
