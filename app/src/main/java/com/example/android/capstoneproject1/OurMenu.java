@@ -66,8 +66,6 @@ public class OurMenu extends AppCompatActivity implements LoaderManager.LoaderCa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_our_menu);
-        itemcnt = getIntent().getIntExtra(getString(R.string.values), 0);
-        price = getIntent().getDoubleExtra(getString(R.string.price), 0);
         rcvdstring = getIntent().getStringExtra(getString(R.string.total));
         StartersListClass startersListClass = new StartersListClass();
         itemcnt = startersListClass.getsize();
@@ -213,6 +211,9 @@ public class OurMenu extends AppCompatActivity implements LoaderManager.LoaderCa
             // ui_hot.setText(Integer.toString(sizes));
             ui_hot.setText(String.format(Locale.ENGLISH, "%d", sizes));
             ui_hot.setContentDescription(Integer.toString(sizes) + getString(R.string.itemselected));
+        }
+        else {
+            ui_hot.setVisibility(View.GONE);
         }
         menulayout.setOnClickListener(new View.OnClickListener() {
             @Override

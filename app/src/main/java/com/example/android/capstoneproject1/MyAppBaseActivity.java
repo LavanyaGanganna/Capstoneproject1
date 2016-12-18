@@ -168,6 +168,8 @@ public abstract class MyAppBaseActivity extends AppCompatActivity implements Sta
                 price = data.getDoubleExtra(getString(R.string.price), 0);
                 itemcnt = data.getIntExtra(getString(R.string.values), 0);
                 recvdstring = data.getStringExtra(getString(R.string.total));
+                StartersListClass startersListClass = new StartersListClass();
+                itemcnt = startersListClass.getsize();
                 if (itemcnt != 0) {
                     ui_hot.setVisibility(View.VISIBLE);
                     ui_hot.setText(String.format(Locale.ENGLISH, "%d", itemcnt));
