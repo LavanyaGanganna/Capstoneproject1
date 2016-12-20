@@ -23,5 +23,6 @@ _Follow these instructions to build and run the project._
 
 ## License
 
-Copyright 2016-2018 Lavanya Ganganna
+Copyright 2016-2018 Lavanya Ganganna.
+
 Licensed under the MIT License https://opensource.org/licenses/MIT
