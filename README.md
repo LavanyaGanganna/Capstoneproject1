@@ -1,9 +1,7 @@
 # Capstoneproject1
-
 This project is the food ordering app for Red Chillies restaurant.This app is developed as part of Udacity "Android Developer  Nanodegree" program capstone project.Red Chillies app is perfect for all the people who love Spicy Kerala cuisine ,in and around Milpitas,Santa Clara county.
 
 ## Getting Started
-- - - -
 _Follow these instructions to build and run the project._
 * Clone this repository.
 * Download the appropriate JDK for your system.I am currently on JDK 8.
@@ -12,7 +10,6 @@ _Follow these instructions to build and run the project._
 * Run the app. Click `Run > Run app`. After the project builds you'll be prompted to launch on device or launch on emulator.
 
 ## Features
-- - - -
 * Displays full restaurant Menu with photos. 
 * Uses Google Maps to show direction to Red Chillies,Milpitas 
 * Integrates paypal to pay money online.
