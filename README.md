@@ -20,3 +20,6 @@ _Follow these instructions to build and run the project._
 * Mail is sent to users using Java Mail API after the successful payment from redchillies manager.
 * The restaurant full menu is stored in local database using sqlite database.
 * The restaurant manager can login as admin and view the full orders and delete the order once picked up.
+##License
+Copyright 2016-2018 Lavanya Ganganna
+Licensed under the MIT License [https://opensource.org/licenses/MIT]
